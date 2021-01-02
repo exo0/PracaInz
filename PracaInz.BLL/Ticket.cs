@@ -14,6 +14,7 @@ namespace PracaInz.BLL
         public int Id { get; set; }
         public string Title { get; set; }
         public string Message { get; set; }
+        public bool isFinished { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime ClosedTime { get; set; }
         public User Author { get; set; }
