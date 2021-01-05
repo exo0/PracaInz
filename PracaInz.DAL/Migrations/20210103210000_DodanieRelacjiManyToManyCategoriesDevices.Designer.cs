@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracaInz.DAL.EF;
 
 namespace PracaInz.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210103210000_DodanieRelacjiManyToManyCategoriesDevices")]
+    partial class DodanieRelacjiManyToManyCategoriesDevices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,9 +265,11 @@ namespace PracaInz.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -283,6 +287,7 @@ namespace PracaInz.DAL.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
@@ -304,9 +309,6 @@ namespace PracaInz.DAL.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -318,22 +320,6 @@ namespace PracaInz.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<int>("UserType").HasValue(0);
-                });
-
-            modelBuilder.Entity("PracaInz.BLL.Admin", b =>
-                {
-                    b.HasBaseType("PracaInz.BLL.User");
-
-                    b.HasDiscriminator().HasValue(1);
-                });
-
-            modelBuilder.Entity("PracaInz.BLL.HelpDesk", b =>
-                {
-                    b.HasBaseType("PracaInz.BLL.User");
-
-                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("CategoryDevice", b =>

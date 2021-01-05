@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracaInz.DAL.EF;
 
 namespace PracaInz.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210103205021_RozwiniecieKlasyUser")]
+    partial class RozwiniecieKlasyUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
-
-            modelBuilder.Entity("CategoryDevice", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DevicesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "DevicesId");
-
-                    b.HasIndex("DevicesId");
-
-                    b.ToTable("CategoryDevice");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
@@ -157,6 +144,9 @@ namespace PracaInz.DAL.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CategoryDeviceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("DeviceDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -169,6 +159,8 @@ namespace PracaInz.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryDeviceId");
 
                     b.HasIndex("UserId");
 
@@ -252,6 +244,10 @@ namespace PracaInz.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");
 
@@ -263,9 +259,11 @@ namespace PracaInz.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -283,6 +281,7 @@ namespace PracaInz.DAL.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
@@ -304,9 +303,6 @@ namespace PracaInz.DAL.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -318,37 +314,6 @@ namespace PracaInz.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<int>("UserType").HasValue(0);
-                });
-
-            modelBuilder.Entity("PracaInz.BLL.Admin", b =>
-                {
-                    b.HasBaseType("PracaInz.BLL.User");
-
-                    b.HasDiscriminator().HasValue(1);
-                });
-
-            modelBuilder.Entity("PracaInz.BLL.HelpDesk", b =>
-                {
-                    b.HasBaseType("PracaInz.BLL.User");
-
-                    b.HasDiscriminator().HasValue(2);
-                });
-
-            modelBuilder.Entity("CategoryDevice", b =>
-                {
-                    b.HasOne("PracaInz.BLL.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PracaInz.BLL.Device", null)
-                        .WithMany()
-                        .HasForeignKey("DevicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -404,11 +369,17 @@ namespace PracaInz.DAL.Migrations
 
             modelBuilder.Entity("PracaInz.BLL.Device", b =>
                 {
+                    b.HasOne("PracaInz.BLL.Category", "CategoryDevice")
+                        .WithMany("Devices")
+                        .HasForeignKey("CategoryDeviceId");
+
                     b.HasOne("PracaInz.BLL.User", "DeviceOwner")
                         .WithMany("Devices")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CategoryDevice");
 
                     b.Navigation("DeviceOwner");
                 });
@@ -422,6 +393,11 @@ namespace PracaInz.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("PracaInz.BLL.Category", b =>
+                {
+                    b.Navigation("Devices");
                 });
 
             modelBuilder.Entity("PracaInz.BLL.User", b =>

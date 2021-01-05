@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +40,7 @@ namespace PracaInz.Web
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<DeviceServices>();
