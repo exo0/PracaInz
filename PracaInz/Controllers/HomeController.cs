@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PracaInz.Services;
 using PracaInz.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,17 @@ namespace PracaInz.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
         }
 
         public IActionResult Index()
         {
+            
             return View();
         }
 

@@ -13,7 +13,12 @@ namespace PracaInz.BLL
         [Key]
         public int Id { get; set; }
         [Required]
-        public string DeviceName { get; set; }
+        
+        public string Manufacturer { get; set; }
+        [Required]
+        public string Model { get; set; }
+        [Required]
+        public string SerialNumber { get; set; }
         [Required]
         public string DeviceDescription { get; set; }
         public ICollection<Category> Categories { get; set; }

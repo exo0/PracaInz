@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PracaInz.ViewModels.CategoryViewModels
 {
-    public class NewCategoryItemViewMOdel
+    public class NewCategoryItemViewModel
     {
         public string Title { get; set; }
     }

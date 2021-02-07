@@ -1,0 +1,23 @@
+﻿@model PracaInz.ViewModels.AdministrationViewModels.RoleListViewModel
+
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-success float-right" asp-controller="Role" asp-action="CreateRole">Add Role</a>
+    </div>
+</div>
+
+@foreach (var role in Model.Roles)
+{
+    <div class="card mb-3">
+        <div class="card-header">
+            Role Id : @role.Id
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@role.Name</h5>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
+            <a class="btn btn-danger" asp-controller="Administration" asp-action="Delete" asp-route-id="@role.Id">Delete</a>
+        </div>
+    </div>
+}

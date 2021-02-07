@@ -27,7 +27,9 @@ namespace PracaInz.Services
                 Devices = _context.Devices.Select(x => new DeviceListItemViewModel
                 {
                     Id = x.Id,
-                    DeviceName = x.DeviceName,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    SerialNumber = x.SerialNumber,
                     DeviceDescription = x.DeviceDescription,
                     Categories = x.Categories
                 })
@@ -45,7 +47,9 @@ namespace PracaInz.Services
             var vm = new DeviceListItemViewModel
             {
                 Id = Device.Id,
-                DeviceName = Device.DeviceName,
+                Manufacturer = Device.Manufacturer,
+                Model = Device.Model,
+                SerialNumber = Device.SerialNumber,
                 DeviceDescription = Device.DeviceDescription,
                 Categories = Device.Categories
             };
@@ -53,14 +57,21 @@ namespace PracaInz.Services
             return vm;
         }
 
-        public async Task AddAsync(string deviceName, string deviceDescription, int userId, int categoryId)
+        public async Task AddAsync(string manufacturer,
+            string model,
+            string serialNumber,
+            string deviceDescription,
+            int userId,
+            int categoryId)
         {
             Category cat = _context.Categories.Find(categoryId);
 
 
             var device = new Device
             {
-                DeviceName = deviceName,
+                Manufacturer = manufacturer,
+                Model = model,
+                SerialNumber = serialNumber,
                 DeviceDescription = deviceDescription,
                 DeviceOwner = await _userManager.FindByIdAsync(userId.ToString()),
                 Categories = new List<Category>()

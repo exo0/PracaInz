@@ -8,7 +8,9 @@ namespace PracaInz.ViewModels.DevicesViewModels
 {
     public class NewDeviceViewModel
     {
-        public string DeviceName { get; set; }
+        public string Manufacturer { get; set; }
+        public string Model { get; set; }
+        public string SerialNumber { get; set; }
         public string DeviceDescription { get; set; }
         public int UserId { get; set; }
         public int CategoryId { get; set; }

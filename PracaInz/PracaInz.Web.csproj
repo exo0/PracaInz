@@ -15,10 +15,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PracaInz.Services\PracaInz.Services.csproj" />
+    <ProjectReference Include="..\PracaInz.ViewModels\PracaInz.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Views\NetworkDevices\" />
   </ItemGroup>
 
 </Project>

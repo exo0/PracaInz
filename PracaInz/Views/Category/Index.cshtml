@@ -1,0 +1,30 @@
+﻿@model PracaInz.ViewModels.CategoryViewModels.CategoryListViewModel
+
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-info float-right" asp-controller="Category" asp-action="Add">Dodaj kategorie</a>
+    </div>
+
+</div>
+
+@foreach (var cat in Model.Categories)
+{
+
+
+    <div class="row">
+        <div class="col-9">
+            <h1 style="color: #dbc16c;">Tytuł kategorii: @cat.Title</h1>
+        </div>
+    </div>
+    <div class="row mt-1">
+
+
+        <div class="col-8">
+            <div class="butony">
+                <a class="btn btn-success float-right" asp-controller="Category" asp-action="Edit" asp-route-id="@cat.Id">Edit</a>
+                <a class="btn btn-danger float-right" asp-controller="Category" asp-action="Delete" asp-route-id="@cat.Id">Delete</a>
+            </div>
+        </div>
+    </div>
+
+} 

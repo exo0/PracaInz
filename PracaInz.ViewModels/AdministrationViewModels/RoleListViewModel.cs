@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PracaInz.ViewModels.AdministrationViewModels
 {
-    public class UserListViewModel
+    public class RoleListViewModel
     {
-        public IEnumerable<UserListItemViewModel> Users { get; set; }
+        public IEnumerable<RoleListItemViewModel> Roles { get; set; }
     }
 }
