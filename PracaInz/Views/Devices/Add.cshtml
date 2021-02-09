@@ -27,5 +27,11 @@
                 asp-items="ViewBag.Categories"></select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label class="control-label">User</label>
+        <select asp-for="UserId" class="form-control"
+                asp-items="ViewBag.Users"></select>
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
     <button class="btn btn-block btn-primary" type="submit">Add</button>
 </form>

@@ -50,6 +50,7 @@ namespace PracaInz.Services
                 Manufacturer = Device.Manufacturer,
                 Model = Device.Model,
                 SerialNumber = Device.SerialNumber,
+                DeviceOwner = Device.DeviceOwner,
                 DeviceDescription = Device.DeviceDescription,
                 Categories = Device.Categories
             };
@@ -65,6 +66,7 @@ namespace PracaInz.Services
             int categoryId)
         {
             Category cat = _context.Categories.Find(categoryId);
+            User usr = _context.Users.Find(userId);
 
 
             var device = new Device
@@ -73,7 +75,8 @@ namespace PracaInz.Services
                 Model = model,
                 SerialNumber = serialNumber,
                 DeviceDescription = deviceDescription,
-                DeviceOwner = await _userManager.FindByIdAsync(userId.ToString()),
+                //DeviceOwner = await _userManager.FindByIdAsync(userId.ToString()),
+                DeviceOwner = usr,
                 Categories = new List<Category>()
             };
 
@@ -83,8 +86,6 @@ namespace PracaInz.Services
         }
 
 
-        // Funkcja która jest odpowiedzialna za usuwanie urządzenia z bazy danych 
-        // wyszukując go w bazie po "id"
         public void DeleteDevice(int id)
         {
             var Device = _context.Devices.Find(id);

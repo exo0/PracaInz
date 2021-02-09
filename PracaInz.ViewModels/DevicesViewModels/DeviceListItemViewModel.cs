@@ -15,6 +15,8 @@ namespace PracaInz.ViewModels.DevicesViewModels
         public string SerialNumber { get; set; }
         public string DeviceDescription { get; set; }
         public ICollection<Category> Categories { get; set; }
+        public User DeviceOwner { get; set; }
+        public int UserId { get; set; }
         public int CategoryId { get; set; }
 
     }

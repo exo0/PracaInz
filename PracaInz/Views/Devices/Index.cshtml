@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model PracaInz.ViewModels.DevicesViewModels.DeviceListViewModel
+
+<div class="row">
+    <div class="col-6">
+        <p>Miejsce na wyszukiwarke</p>
+    </div>
+    <div class="col-2">
+        <button class="btn-info">Wyszukaj</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-1">ID</div>
+    <div class="col-2">Manufacturer</div>
+    <div class="col-2">Model</div>
+    <div class="col-2">S/N</div>
+    <div class="col-2">Category</div>
+    <div class="col-3">Description</div>
+</div>
+@foreach(var dev in Model.Devices)
+{
+    <div class="row">
+        <div class="col-1">@dev.Id</div>
+        <div class="col-2">@dev.Manufacturer</div>
+        <div class="col-2">@dev.Model</div>
+        <div class="col-2">@dev.SerialNumber</div>
+        <div class="col-2">@dev.Categories.ToList().FirstOrDefault().ToString()</div>
+        <div class="col-3">@dev.DeviceDescription</div>
+
+    </div>
 }

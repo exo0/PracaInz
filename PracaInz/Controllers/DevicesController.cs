@@ -16,11 +16,14 @@ namespace PracaInz.Web.Controllers
         private DeviceServices _deviceServices;
         private CategoryServices _categoryServices;
         private UserManager<User> _userManager;
+        private UserRoleIdentityServices _userRoleIdentityServices;
 
         public DevicesController(DeviceServices deviceServices,
             CategoryServices categoryServices,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            UserRoleIdentityServices userRoleIdentityServices)
         {
+            _userRoleIdentityServices = userRoleIdentityServices;
             _deviceServices = deviceServices;
             _categoryServices = categoryServices;
             _userManager = userManager;
@@ -51,7 +54,13 @@ namespace PracaInz.Web.Controllers
             // i wrzucenie ich do rozwijanej listy która jest dostępna w View 
             // odpowiadającym za dodawanie
             var categories = _categoryServices.ReturnAllCategoryToDropDown();
+            var users = _userRoleIdentityServices.ReturnAllUsersToDropDown();
 
+            ViewBag.Users = users.Select(y => new SelectListItem()
+            {
+                Text = y.FirstName,
+                Value = y.Id.ToString()
+            });
             ViewBag.Categories = categories.Select(x => new SelectListItem()
             {
                 Text = x.Title,
@@ -73,7 +82,7 @@ namespace PracaInz.Web.Controllers
                 data.Model,
                 data.SerialNumber,
                 data.DeviceDescription,
-                user.Id,
+                data.UserId,
                 data.CategoryId);
             return RedirectToAction("Index", "Devices");
         }

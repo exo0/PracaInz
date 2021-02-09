@@ -51,6 +51,23 @@ namespace PracaInz.Services
             };
             return vm;
         }
+
+        public IList<User> ReturnAllUsersToDropDown()
+        {
+            var usrs = context.Users.ToList();
+            IList<User> users = new List<User>();
+
+            foreach (var user in usrs)
+            {
+                users.Add(new User
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName + " " + user.LastName
+                }) ;
+            }
+
+            return users;
+        }
         #endregion
 
         // not implemented yet (currently running via Controller 
