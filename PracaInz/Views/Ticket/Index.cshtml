@@ -1,0 +1,33 @@
+﻿@model PracaInz.ViewModels.TicketViewModels.TicketListViewModel
+
+<div class="row">
+    <div class="col-6">
+        <p>Miejsce na wyszukiwarke</p>
+    </div>
+    <div class="col-2">
+        <button class="btn-info">Wyszukaj</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-1">ID</div>
+    <div class="col-2">Title</div>
+    <div class="col-4">Message</div>
+    <div class="col-4">Author</div>
+    <div class="col-1">Status</div>
+</div>
+
+@foreach(var ticket in Model.Tickets)
+{
+<div class="row">
+    
+        <div class="col-1">@ticket.Id</div>
+        <div class="col-2">
+            <a asp-controller="Ticket" asp-action="Edit" asp-route-id="@ticket.Id">@ticket.Title</a>  
+        </div>
+        <div class="col-4">@ticket.Message</div>
+        <div class="col-4">@ticket.Author.FirstName @ticket.Author.LastName</div>
+        <div class="col-1">@ticket.Status</div>
+    
+</div>
+}

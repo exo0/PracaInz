@@ -10,6 +10,7 @@ namespace PracaInz.ViewModels.TicketViewModels
     {
         public string Title { get; set; }
         public string Message { get; set; }
+        public int AuthorId { get; set; }
         
 
     }

@@ -1,0 +1,14 @@
+﻿@model PracaInz.ViewModels.TicketViewModels.TicketListItemViewModel
+
+<h3>Ticket title: @Model.Title</h3>
+<p>Content: @Model.Message</p>
+<p>Status: @Model.Status</p>
+<p>Created time: @Model.CreateTime</p>
+<p>Closed time: @Model.ClosedTime</p>
+<p>Author: @Model.Author.FirstName @Model.Author.LastName</p>
+
+<div class="container">
+    <button class="btn-danger">Close without success</button>
+    <button class="btn-success">Assign to me</button>
+    <button class="btn-danger">Close sukcesufly</button>
+</div>

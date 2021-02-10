@@ -68,18 +68,62 @@ namespace PracaInz.Services
             return vm;
         }
 
-        public void Add(string title, string message, TicketStatus status)
+        public async Task AddTicket(string title, string message,int userId)
         {
+            User usr = _context.Users.Find(userId);
             var Ticket = new Ticket
             {
                 Title = title,
                 Message = message,
-                Status = status,
-                CreateTime = DateTime.Now
+                Status = (TicketStatus)0,
+                CreateTime = DateTime.Now,
+                Author = usr
+
 
             };
             _context.Tickets.Add(Ticket);
             _context.SaveChanges();
         }
+
+        public void DeleteTicket(int id)
+        {
+            var ticket = _context.Tickets.Find(id);
+            _context.Tickets.Remove(ticket);
+            
+        }
+
+        #region TicketStatus
+        public void AssignTicketToYourSelf(int id)
+        {
+
+            var ticket = _context.Tickets.Find(id);
+            ticket.Status = (TicketStatus)1;
+            _context.Tickets.Update(ticket);
+        }
+
+        public void FinishTicketSuccesfully(int id)
+        {
+            var ticket = _context.Tickets.Find(id);
+            ticket.Status = (TicketStatus)2;
+            _context.Tickets.Update(ticket);
+        }
+
+        public void FinishTicketUnresolved(int id)
+        {
+            var ticket = _context.Tickets.Find(id);
+            ticket.Status = (TicketStatus)3;
+            _context.Tickets.Update(ticket);
+        }
+
+        public void PostponeTicket(int id)
+        {
+            var ticket = _context.Tickets.Find(id);
+            ticket.Status = (TicketStatus)4;
+            _context.Tickets.Update(ticket);
+        }
+        #endregion
+
+
+
     }
 }

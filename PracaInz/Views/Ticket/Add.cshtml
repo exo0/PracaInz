@@ -3,15 +3,15 @@
 
 <form asp-action="Add" method="post">
     <div class="form-group">
-        <label asp-for="Title" class="control-label">Tytuł kategorii: </label>
+        <label asp-for="Title" class="control-label">Ticket title: </label>
         <input asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Message" class="control-label">Tytuł kategorii: </label>
+        <label asp-for="Message" class="control-label">Title message: </label>
         <input asp-for="Message" class="form-control" />
         <span asp-validation-for="Message" class="text-danger"></span>
     </div>
 
-    <button class="btn btn-block btn-primary" type="submit">Dodaj</button>
+    <button class="btn btn-block btn-primary" type="submit">Add</button>
 </form>
