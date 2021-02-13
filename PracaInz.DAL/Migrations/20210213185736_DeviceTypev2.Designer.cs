@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracaInz.DAL.EF;
 
 namespace PracaInz.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210213185736_DeviceTypev2")]
+    partial class DeviceTypev2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,9 +165,6 @@ namespace PracaInz.DAL.Migrations
 
                     b.Property<int>("DeviceType")
                         .HasColumnType("int");
-
-                    b.Property<string>("IPAddress")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Manufacturer")
                         .IsRequired()
@@ -341,6 +340,9 @@ namespace PracaInz.DAL.Migrations
             modelBuilder.Entity("PracaInz.BLL.NetworkDevice", b =>
                 {
                     b.HasBaseType("PracaInz.BLL.Device");
+
+                    b.Property<string>("IPAddress")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue(1);
                 });

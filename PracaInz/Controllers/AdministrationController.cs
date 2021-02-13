@@ -75,26 +75,26 @@ namespace PracaInz.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
+                var usr = UserFactory.Create(model.UserType);
+
+                usr.UserName = model.Email;
+                usr.Email = model.Email;
+                usr.FirstName = model.FirstName;
+                usr.LastName = model.LastName;
 
                 // Kopiowanie danych z modelu RegisterUserViewModel do... chcemy by tutaj był user, lecz nie chce byc 
-                var user = new User
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-
-
-                };
+                
 
                 // Zapisanie danych usera do bazy 
-                var result = await userManager.CreateAsync(user, model.Password);
+                
+                var result = await userManager.CreateAsync(usr, model.Password);
 
                 if (result.Succeeded)
                 {
-                    //await signInManager.SignInAsync(user, isPersistent: false);
+
                     return RedirectToAction("Index", "Home");
                 }
 

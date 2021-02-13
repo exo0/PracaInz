@@ -12,7 +12,7 @@ namespace PracaInz.DAL.EF
         // create DB for Tickets 
         public DbSet<Ticket> Tickets { get; set; }
         // create DB for Devices (including Network Devices - I'm using TPH here, below you can find more code about it)
-        public DbSet<Device> Devices { get; set; }
+        public DbSet<Device> Device { get; set; }
         // create DB for Categories
         public DbSet<Category> Categories { get; set; }
 
@@ -26,6 +26,12 @@ namespace PracaInz.DAL.EF
                 .HasValue<User>(0)
                 .HasValue<Admin>(1)
                 .HasValue<HelpDesk>(2);
+
+            modelBuilder.Entity<Device>()
+                .ToTable("Device")
+                .HasDiscriminator<int>("DeviceType")
+                .HasValue<Device>(0)
+                .HasValue<NetworkDevice>(1);
         }
 
     }

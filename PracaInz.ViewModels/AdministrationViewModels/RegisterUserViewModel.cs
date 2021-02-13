@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PracaInz.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace PracaInz.ViewModels.AdministrationViewModels
         public string FirstName { get; set; }
 
         [Required]
-        public int UserType { get; set; }
+        public UserType UserType { get; set; }
 
         [Required]
         public string LastName { get; set; }

@@ -12,5 +12,7 @@ namespace PracaInz.BLL
         public string IPAddress { get; set; }
         [NotMapped]
         public bool isAlive { get; set; }
+
+        // miejsce na metode która ma pingować 
     }
 }

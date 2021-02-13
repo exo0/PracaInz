@@ -32,6 +32,35 @@ namespace PracaInz.Web.Controllers
             var vm = _ticketService.GetTicket(id);
             return View(vm);
         }
+        #region TicketStatus
+        
+        public IActionResult AssignTicketToYourself(int id)
+        {
+            _ticketService.AssignTicketToYourSelf(id);
+            return RedirectToAction("Index", "Ticket");
+        }
+
+        public IActionResult FinishTicketSuccesfully(int id)
+        {
+            _ticketService.FinishTicketSuccesfully(id);
+            return RedirectToAction("Index", "Ticket");
+        }
+
+        public IActionResult FinishTicketUnresolved(int id)
+        {
+            _ticketService.FinishTicketUnresolved(id);
+            return RedirectToAction("Index", "Ticket");
+        }
+
+        public IActionResult PostponeTicket(int id)
+        {
+            _ticketService.PostponeTicket(id);
+            return RedirectToAction("Index", "Ticket");
+        }
+
+        #endregion
+
+
         [HttpGet]
         public IActionResult Edit(int id)
         {

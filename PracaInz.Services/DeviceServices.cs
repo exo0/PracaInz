@@ -24,7 +24,7 @@ namespace PracaInz.Services
         {
             var vm = new DeviceListViewModel()
             {
-                Devices = _context.Devices.Select(x => new DeviceListItemViewModel
+                Devices = _context.Device.Select(x => new DeviceListItemViewModel
                 {
                     Id = x.Id,
                     Manufacturer = x.Manufacturer,
@@ -39,7 +39,7 @@ namespace PracaInz.Services
 
         public DeviceListItemViewModel GetDevice(int id)
         {
-            var Device = _context.Devices
+            var Device = _context.Device
                 .Where(b => b.Id == id)
                 .Include(b => b.Categories)
                 .FirstOrDefault();
@@ -81,15 +81,15 @@ namespace PracaInz.Services
             };
 
             device.Categories.Add(cat);
-            _context.Devices.Add(device);
+            _context.Device.Add(device);
             _context.SaveChanges();
         }
 
 
         public void DeleteDevice(int id)
         {
-            var Device = _context.Devices.Find(id);
-            _context.Devices.Remove(Device);
+            var Device = _context.Device.Find(id);
+            _context.Device.Remove(Device);
             _context.SaveChanges();
         }
 

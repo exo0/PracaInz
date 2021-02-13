@@ -8,7 +8,9 @@
 <p>Author: @Model.Author.FirstName @Model.Author.LastName</p>
 
 <div class="container">
-    <button class="btn-danger">Close without success</button>
-    <button class="btn-success">Assign to me</button>
-    <button class="btn-danger">Close sukcesufly</button>
+    <a class="btn btn-light" asp-controller="Ticket" asp-action="AssignTicketToYourself" asp-route-id="@Model.Id">Assign to yourself</a>
+    <a class="btn btn-warning" asp-controller="Ticket" asp-action="FinishTicketUnresolved" asp-route-id="@Model.Id">Close without success</a>
+    <a class="btn btn-success"  asp-controller="Ticket" asp-action="FinishTicketSuccesfully" asp-route-id="@Model.Id">Close with success</a>
+    <a class="btn btn-lg" asp-controller="Ticket" asp-action="PostponeTicket" asp-route-id="@Model.Id">Postpone ticket</a>
+
 </div>
