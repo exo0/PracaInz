@@ -99,6 +99,7 @@ namespace PracaInz.Services
             var ticket = _context.Tickets.Find(id);
             ticket.Status = (TicketStatus)1;
             _context.Tickets.Update(ticket);
+            _context.SaveChanges();
         }
 
         public void FinishTicketSuccesfully(int id)
@@ -106,6 +107,7 @@ namespace PracaInz.Services
             var ticket = _context.Tickets.Find(id);
             ticket.Status = (TicketStatus)2;
             _context.Tickets.Update(ticket);
+            _context.SaveChanges();
         }
 
         public void FinishTicketUnresolved(int id)
@@ -113,6 +115,7 @@ namespace PracaInz.Services
             var ticket = _context.Tickets.Find(id);
             ticket.Status = (TicketStatus)3;
             _context.Tickets.Update(ticket);
+            _context.SaveChanges();
         }
 
         public void PostponeTicket(int id)
@@ -120,6 +123,7 @@ namespace PracaInz.Services
             var ticket = _context.Tickets.Find(id);
             ticket.Status = (TicketStatus)4;
             _context.Tickets.Update(ticket);
+            _context.SaveChanges();
         }
         #endregion
 
