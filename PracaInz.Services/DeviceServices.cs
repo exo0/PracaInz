@@ -39,10 +39,10 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetAllDevicesFilterByUserId(string userName)
         {
-            var currentLoggedUser = _context.Users.Where(x => x.FirstName == userName).FirstOrDefault();
             var vm = new DeviceListViewModel()
             {
-                Devices = _context.Device.Select(x => new DeviceListItemViewModel
+                Devices = _context.Device.Where(x=>x.DeviceOwner.UserName == userName)
+                .Select(x => new DeviceListItemViewModel
                 {
                     Id = x.Id,
                     Manufacturer = x.Manufacturer,
@@ -50,7 +50,7 @@ namespace PracaInz.Services
                     SerialNumber = x.SerialNumber,
                     DeviceDescription = x.DeviceDescription,
                     Categories = x.Categories
-                }).Where(x=>x.UserId == currentLoggedUser.Id)
+                })
             };
             return vm;
         }
@@ -60,6 +60,25 @@ namespace PracaInz.Services
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.OfType<Device>().Select(x => new DeviceListItemViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    SerialNumber = x.SerialNumber,
+                    DeviceDescription = x.DeviceDescription,
+                    Categories = x.Categories
+                })
+            };
+            return vm;
+        }
+
+        public DeviceListViewModel GetNormalDeviceFilteredByUser(string userName)
+        {
+            var vm = new DeviceListViewModel()
+            {
+                Devices = _context.Device.OfType<Device>()
+                .Where(x=>x.DeviceOwner.UserName == userName)
+                .Select(x => new DeviceListItemViewModel
                 {
                     Id = x.Id,
                     Manufacturer = x.Manufacturer,
