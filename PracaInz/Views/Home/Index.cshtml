@@ -4,6 +4,7 @@
     ViewData["Title"] = "Home Page";
 }
 @inject PracaInz.Services.DeviceServices DeviceService
+@inject PracaInz.Services.NetworkDeviceServices NetworkDeviceService
 @inject PracaInz.Services.TicketServices TicketService
 @inject SignInManager<User> SignInManager
 
@@ -13,15 +14,34 @@
 {
     <div class="row">
         <div class="col-12">
-            <p>Devices section</p>
+            <p style="text-align:center">Devices section</p>
         </div>
 
-        @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())
+        @*@await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())*@
+        @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetNormalDeviceFilteredByUser(User.Identity.Name))
+
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h5 style="text-align:center">Network devices</h5>
+        </div>
+        @await Html.PartialAsync("~/Views/NetworkDevices/_Index.cshtml", NetworkDeviceService.GetAllDevicesFilteredByUser(User.Identity.Name))
+    </div>
+
+    <div class="row pt-5">
+        <div class="col-12">
+            <h5 style="text-align:center">Open tickets</h5>
+        </div>
+        @await Html.PartialAsync("~/Views/Ticket/_Index.cshtml", TicketService.GetAllOpenTicketsFilteredByUserId(User.Identity.Name))
 
     </div>
 
     <div class="row pt-5">
-        @await Html.PartialAsync("~/Views/Ticket/_Index.cshtml", TicketService.GetAllTickets())
+        <div class="col-12">
+            <h5 style="text-align:center">Closed Tickets</h5>
+        </div>
+        @await Html.PartialAsync("~/Views/Ticket/_IndexFinished.cshtml", TicketService.GetAllFinishedTicketsFilteredByUserId(User.Identity.Name))
 
     </div>
 }

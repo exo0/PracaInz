@@ -43,6 +43,28 @@ namespace PracaInz.Services
             return vm;
         }
 
+        public NetworkDeviceListViewModel GetAllDevicesFilteredByUser(string userName)
+        {
+            var vm = new NetworkDeviceListViewModel()
+            {
+                NetworkDevices = _context.Device.OfType<NetworkDevice>()
+                .Where(x=>x.DeviceOwner.UserName == userName)
+                .Select(x => new NetworkDeviceListItemViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    SerialNumber = x.SerialNumber,
+                    DeviceDescription = x.DeviceDescription,
+                    Categories = x.Categories,
+                    IPAddress = x.IPAddress
+
+
+                })
+            };
+            return vm;
+        }
+
         public NetworkDeviceListItemViewModel GetDevice(int id)
         {
             var Device = _context.Device.OfType<NetworkDevice>()
