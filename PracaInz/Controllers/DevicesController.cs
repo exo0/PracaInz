@@ -47,6 +47,13 @@ namespace PracaInz.Web.Controllers
             return RedirectToAction("Index", "Devices");
         }
 
+        public IActionResult GetYourDevices(int id)
+        {
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+            var devices = _deviceServices.GetAllDevicesFilterByUserId(User.Identity.Name);
+            return PartialView("~/Views/Devices/Index.cshtml", devices);
+        }
+
         [HttpGet]
         public IActionResult Add()
         {

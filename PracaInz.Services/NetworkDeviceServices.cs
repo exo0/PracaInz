@@ -82,7 +82,6 @@ namespace PracaInz.Services
                 Model = model,
                 SerialNumber = serialNumber,
                 DeviceDescription = deviceDescription,
-                //DeviceOwner = await _userManager.FindByIdAsync(userId.ToString()),
                 DeviceOwner = usr,
                 IPAddress = IPAddress,
                 Categories = new List<Category>()

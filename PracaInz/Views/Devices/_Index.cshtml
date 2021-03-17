@@ -1,0 +1,70 @@
+﻿@model PracaInz.ViewModels.DevicesViewModels.DeviceListViewModel
+
+@*<div class="row">
+    
+    <div class="col-2">Manufacturer</div>
+    <div class="col-2">Model</div>
+    <div class="col-2">S/N</div>
+    <div class="col-2">Category</div>
+    <div class="col-3">Description</div>
+</div>
+@foreach (var dev in Model.Devices)
+{
+    <div class="row">
+        <div class="col-1">@dev.Id</div>
+        <div class="col-2">@dev.Manufacturer</div>
+        <div class="col-2">@dev.Model</div>
+        <div class="col-2">@dev.SerialNumber</div>
+        <div class="col-2">@dev.Categories.ToList().FirstOrDefault().ToString()</div>
+        <div class="col-3">@dev.DeviceDescription</div>
+
+
+    </div>
+}*@
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>ID</p>
+            </th>
+            <th>
+                <p>Model</p>
+            </th>
+            <th>
+                <p>Serial Number</p>
+            </th>
+            <th>
+                <p>Category</p>
+            </th>
+            <th>
+                <p>Device Description</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dev in Model.Devices)
+        {
+            <tr>
+                <td>
+                    @dev.Id
+                </td>
+                <td>
+                    @dev.Model
+                </td>
+                <td>
+                    @dev.SerialNumber
+                </td>
+                <td>
+                    @dev.Categories.FirstOrDefault()
+                </td>
+                <td>
+                    @dev.DeviceDescription
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

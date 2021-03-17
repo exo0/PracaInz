@@ -235,13 +235,6 @@ namespace PracaInz.Web.Controllers
                 ViewBag.roleId = roleId;
 
                 var role = await roleManager.FindByIdAsync(roleId);
-
-                //if (role == null)
-                //{
-                //    ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                //    return View("NotFound");
-                //}
-
                 var model = new List<UserRoleViewModel>();
 
                 foreach (var user in userManager.Users)
@@ -271,16 +264,7 @@ namespace PracaInz.Web.Controllers
             [HttpPost]
             public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
             {
-                //var role = await roleManager.FindByIdAsync(roleId);
-
                 var role = await roleManager.FindByIdAsync(roleId);
-
-                //if (role == null)
-                //{
-                //    ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                //    return View("NotFound");
-                //}
-
                 for (int i = 0; i < model.Count; i++)
                 {
                     var user = await userManager.FindByIdAsync(model[i].UserId);

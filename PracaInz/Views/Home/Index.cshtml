@@ -1,8 +1,35 @@
-﻿@{
+﻿@using PracaInz.BLL
+@using Microsoft.AspNetCore.Identity
+@{
     ViewData["Title"] = "Home Page";
 }
+@inject PracaInz.Services.DeviceServices DeviceService
+@inject PracaInz.Services.TicketServices TicketService
+@inject SignInManager<User> SignInManager
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1 style="text-align: center">Dashboard skurwielu</h1>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="row">
+        <div class="col-12">
+            <p>Devices section</p>
+        </div>
+
+        @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())
+
+    </div>
+
+    <div class="row pt-5">
+        @await Html.PartialAsync("~/Views/Ticket/_Index.cshtml", TicketService.GetAllTickets())
+
+    </div>
+}
+else
+{
+    <h2>Please sign in to see your dashboard</h2>
+}
+
+
+
+

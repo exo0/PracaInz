@@ -1,0 +1,58 @@
+﻿@model PracaInz.ViewModels.TicketViewModels.TicketListViewModel
+
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-success float-right" asp-controller="Ticket" asp-action="Add">Dodaj ticket</a>
+    </div>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>Id</p>
+            </th>
+            <th>
+                <p>Title</p>
+            </th>
+            <th>
+                <p>Message</p>
+            </th>
+            <th>
+                <p>Status</p> 
+            </th>
+            <th>
+                <p>Created Time</p>
+            <th>
+                <p>Closed Time</p>
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model.Tickets)
+        {
+            <tr>
+                <td>
+                    @ticket.Id
+                </td>
+                <td>
+                    @ticket.Title
+                </td>
+                <td>
+                    @ticket.Message
+                </td>
+                <td>
+                    @ticket.Status
+                </td>
+                <td>
+                    @ticket.CreateTime
+                </td>
+                <td>
+                    @ticket.CreateTime
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
