@@ -45,6 +45,48 @@ namespace PracaInz.Services
             return vm;
         }
 
+        public TicketListViewModel GetAllOpenTicketsFilteredByUserId(string userName)
+        {
+            var vm = new TicketListViewModel()
+            {
+                Tickets = _context.Tickets.Where(x=>x.Author.UserName == userName)
+                .Where(x=>x.Status != TicketStatus.Finished)
+                .Select(x => new TicketListItemViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Message = x.Message,
+                    Status = x.Status,
+                    CreateTime = x.CreateTime,
+                    ClosedTime = x.ClosedTime,
+                    Author = x.Author
+                })
+            };
+
+            return vm;
+        }
+
+        public TicketListViewModel GetAllFinishedTicketsFilteredByUserId(string userName)
+        {
+            var vm = new TicketListViewModel()
+            {
+                Tickets = _context.Tickets.Where(x => x.Author.UserName == userName)
+                .Where(x => x.Status == TicketStatus.Finished)
+                .Select(x => new TicketListItemViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Message = x.Message,
+                    Status = x.Status,
+                    CreateTime = x.CreateTime,
+                    ClosedTime = x.ClosedTime,
+                    Author = x.Author
+                })
+            };
+
+            return vm;
+        }
+
         public TicketListItemViewModel GetTicket(int id)
         {
 
