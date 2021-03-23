@@ -1,60 +1,77 @@
 ﻿@model PracaInz.ViewModels.NetworkDevicesViewModels.NetworkDeviceListViewModel
+@inject PracaInz.Services.NetworkDeviceServices NetworkDeviceServices
 
+@if (Model.NetworkDevices.Count() > 0)
+{
+    <table class="table border border-info rounded">
+        <thead>
+            <tr>
+                <th>
+                    <p>Model</p>
+                </th>
+                <th>
+                    <p>Serial Number</p>
+                </th>
+                <th>
+                    <p>Category</p>
+                </th>
+                <th>
+                    <p>Device Description</p>
+                </th>
+                <th>
+                    <p>IP Address</p>
+                </th>
+                <th>
+                    <p>Last Status</p>
+                </th>
+                <th>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <p>ID</p>
-            </th>
-            <th>
-                <p>Model</p>
-            </th>
-            <th>
-                <p>Serial Number</p>
-            </th>
-            <th>
-                <p>Category</p>
-            </th>
-            <th>
-                <p>Device Description</p>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.NetworkDevices.Count() > 0)
-        {
-            @foreach (var dev in Model.NetworkDevices)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dev1 in Model.NetworkDevices)
             {
                 <tr>
                     <td>
-                        @dev.Id
+                        @dev1.Model
                     </td>
                     <td>
-                        @dev.Model
+                        @dev1.SerialNumber
                     </td>
                     <td>
-                        @dev.SerialNumber
-                    </td>
-                    <td>
-                        @foreach (var cat in dev.Categories)
+                        @foreach (var cat in dev1.Categories)
                         {
                             @cat.Title
                         }
                     </td>
                     <td>
-                        @dev.DeviceDescription
+                        @dev1.DeviceDescription
+                    </td>
+                    <td>
+                        @dev1.IPAddress
+                    </td>
+                    <td>
+                        @if (dev1.isAlive == true)
+                        {
+                            <p style="color: green">@dev1.isAlive</p>
+                        }
+                        else
+                        {
+                            <p style="color: red">@dev1.isAlive</p>
+                        }
+
+                    </td>
+                    <td>
+                        <a asp-controller="NetworkDevices" asp-action="DevicePingStatus" asp-route-id="@dev1.Id">Ping</a>
                     </td>
 
                 </tr>
             }
-        }
-        else
-        {
-            <h4>Brak komputerów przypisanych do Ciebie kochaniutku</h4>
-        }
-
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}
+else
+{
+    <h5 style="text-align: center">Brak przypisanych urządzeń sieciowych</h5>
+}

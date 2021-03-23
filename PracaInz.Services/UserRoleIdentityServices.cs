@@ -52,6 +52,20 @@ namespace PracaInz.Services
             return vm;
         }
 
+        public User GetUserById(int id)
+        {
+            var user = context.Users.Find(id);
+
+            return user;
+        }
+
+        public void DeleteUser(int id)
+        {
+            var user = context.Users.Find(id);
+            context.Users.Remove(user);
+            context.SaveChanges();
+        }
+
         public IList<User> ReturnAllUsersToDropDown()
         {
             var usrs = context.Users.ToList();

@@ -10,5 +10,6 @@ namespace PracaInz.ViewModels.NetworkDevicesViewModels
     public class NetworkDeviceListItemViewModel : DeviceListItemViewModel
     {
         public string IPAddress { get; set; }
+        public bool isAlive { get; set; }
     }
 }

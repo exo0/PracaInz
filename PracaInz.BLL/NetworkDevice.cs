@@ -10,7 +10,7 @@ namespace PracaInz.BLL
     public class NetworkDevice : Device
     {
         public string IPAddress { get; set; }
-        [NotMapped]
+        
         public bool isAlive { get; set; }
 
         // miejsce na metode która ma pingować 

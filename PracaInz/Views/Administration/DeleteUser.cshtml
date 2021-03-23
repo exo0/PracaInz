@@ -1,0 +1,26 @@
+﻿@model PracaInz.BLL.User
+<div class="row">
+    <div class="col-9">
+        <h1 style="color: #dbc16c;">Tytuł: @Model.FirstName + @Model.LastName</h1>
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-6">
+        Przypisane urządzenia:  // brak metody
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-12">
+        <p class="text-center">Czy na pewno chcesz usunąć użytkownika ?</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-info float-right" asp-controller="Administration" asp-action="IndexRole">Nie</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-danger float-left" asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@Model.Id">Tak</a>
+    </div>
+</div>

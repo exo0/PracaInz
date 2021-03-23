@@ -1,66 +1,137 @@
 ﻿@model PracaInz.ViewModels.TicketViewModels.TicketListViewModel
 
-<div class="row">
-    <div class="col-12">
-        <a class="btn btn-success float-right" asp-controller="Ticket" asp-action="Add">Dodaj ticket</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Inz M.Deska</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-6 float-right">
+            <a class="btn btn-success" asp-controller="Ticket" asp-action="Add">Dodaj ticket</a>
+        </div>
+
     </div>
+    @if (Model.Tickets.Count() > 0)
+    {
+        <table class="table pt-3 border border-info rounded">
+            <thead>
+                <tr>
+                    <th>
+                        <p>Id</p>
+                    </th>
+                    <th>
+                        <p>Title</p>
+                    </th>
+                    <th>
+                        <p>Message</p>
+                    </th>
+                    <th>
+                        <p>Status</p>
+                    </th>
+                    <th>
+                        <p>Created Time</p>
 
-</div>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket1 in Model.Tickets)
+                {
+                    <tr>
+                        <td>
+                            @ticket1.Id
+                        </td>
+                        <td>
+                            @ticket1.Title
+                        </td>
+                        <td>
+                            @ticket1.Message
+                        </td>
+                        <td>
+                            @ticket1.Status
+                        </td>
+                        <td>
+                            @ticket1.CreateTime
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<table class="table pt-3">
-    <thead>
-        <tr>
-            <th>
-                <p>Id</p>
-            </th>
-            <th>
-                <p>Title</p>
-            </th>
-            <th>
-                <p>Message</p>
-            </th>
-            <th>
-                <p>Status</p> 
-            </th>
-            <th>
-                <p>Created Time</p>
-            <th>
-                <p>Closed Time</p>
-            </th>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12">
+                <h5 style="text-align:center">Brak ticketów w bazie danych</h5>
+            </div>
             
-        </tr>
-    </thead>
+        </div>
+
+    }
+</body>
+</html>
+
+@*<table class="table pt-3 border border-info rounded">
+
     <tbody>
         @if (Model.Tickets.Count() > 0)
         {
-            @foreach (var ticket in Model.Tickets)
-            {
-                <tr>
-                    <td>
-                        @ticket.Id
-                    </td>
-                    <td>
-                        @ticket.Title
-                    </td>
-                    <td>
-                        @ticket.Message
-                    </td>
-                    <td>
-                        @ticket.Status
-                    </td>
-                    <td>
-                        @ticket.CreateTime
-                    </td>
-                    <td>
-                        @ticket.CreateTime
-                    </td>
-                </tr>
-            }
-        }
-        else
-        {
-            <h3>Brak ticketów dla Ciebie kochaniutki</h3>
-        }
+        <thead>
+            <tr>
+                <th>
+                    <p>Id</p>
+                </th>
+                <th>
+                    <p>Title</p>
+                </th>
+                <th>
+                    <p>Message</p>
+                </th>
+                <th>
+                    <p>Status</p>
+                </th>
+                <th>
+                    <p>Created Time</p>
+                <th>
+                    <p>Closed Time</p>
+                </th>
 
-    </tbody>
-</table>
+            </tr>
+        </thead>
+        @foreach (var ticket in Model.Tickets)
+        {
+            <tr>
+                <td>
+                    @ticket.Id
+                </td>
+                <td>
+                    @ticket.Title
+                </td>
+                <td>
+                    @ticket.Message
+                </td>
+                <td>
+                    @ticket.Status
+                </td>
+                <td>
+                    @ticket.CreateTime
+                </td>
+                <td>
+                    @ticket.CreateTime
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+
+
+    }
+
+        </tbody>
+    </table>*@

@@ -2,60 +2,59 @@
 
 
 
-<table class="table pt-3">
-    <thead>
-        <tr>
-            <th>
-                <p>Id</p>
-            </th>
-            <th>
-                <p>Title</p>
-            </th>
-            <th>
-                <p>Message</p>
-            </th>
-            <th>
-                <p>Status</p> 
-            </th>
-            <th>
-                <p>Created Time</p>
-            <th>
-                <p>Closed Time</p>
-            </th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Tickets.Count() > 0)
-        {
-            @foreach (var ticket in Model.Tickets)
+@if (Model.Tickets.Count() > 0)
+{
+    <table class="table pt-3 border border-info rounded">
+        <thead>
+            <tr>
+                <th>
+                    <p>Id</p>
+                </th>
+                <th>
+                    <p>Title</p>
+                </th>
+                <th>
+                    <p>Message</p>
+                </th>
+                <th>
+                    <p>Status</p>
+                </th>
+                <th>
+                    <p>Created Time</p>
+                <th>
+                    <p>Closed Time</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket1 in Model.Tickets)
             {
                 <tr>
                     <td>
-                        @ticket.Id
+                        @ticket1.Id
                     </td>
                     <td>
-                        @ticket.Title
+                        @ticket1.Title
                     </td>
                     <td>
-                        @ticket.Message
+                        @ticket1.Message
                     </td>
                     <td>
-                        @ticket.Status
+                        @ticket1.Status
                     </td>
                     <td>
-                        @ticket.CreateTime
+                        @ticket1.CreateTime
                     </td>
                     <td>
-                        @ticket.CreateTime
+                        @ticket1.ClosedTime
                     </td>
                 </tr>
             }
-        }
-        else
-        {
-            <h3>Brak ticketów dla Ciebie kochaniutki</h3>
-        }
+        </tbody>
+    </table>
 
-    </tbody>
-</table>
+}
+else
+{
+    <h5 style="text-align:center">Brak ticketów w bazie danych</h5>
+}

@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Threading;
 
 namespace PracaInz.Services
 {
@@ -35,6 +38,7 @@ namespace PracaInz.Services
                     SerialNumber = x.SerialNumber,
                     DeviceDescription = x.DeviceDescription,
                     Categories = x.Categories,
+                    isAlive = x.isAlive,
                     IPAddress = x.IPAddress
                     
                     
@@ -57,6 +61,7 @@ namespace PracaInz.Services
                     SerialNumber = x.SerialNumber,
                     DeviceDescription = x.DeviceDescription,
                     Categories = x.Categories,
+                    isAlive = x.isAlive,
                     IPAddress = x.IPAddress
 
 
@@ -81,6 +86,7 @@ namespace PracaInz.Services
                 DeviceOwner = Device.DeviceOwner,
                 DeviceDescription = Device.DeviceDescription,
                 Categories = Device.Categories,
+                isAlive = Device.isAlive,
                 IPAddress = Device.IPAddress
             };
             return vm;
@@ -106,6 +112,7 @@ namespace PracaInz.Services
                 DeviceDescription = deviceDescription,
                 DeviceOwner = usr,
                 IPAddress = IPAddress,
+                isAlive = false,
                 Categories = new List<Category>()
             };
 
@@ -120,6 +127,33 @@ namespace PracaInz.Services
             _context.Device.Remove(Device);
             _context.SaveChanges();
         }
+
+        public void DevicePingStatus(int id)
+        {
+            var Device = _context.Device.OfType<NetworkDevice>().Where(x=>x.Id == id).FirstOrDefault();
+            
+            Ping pingService = new Ping();
+            PingOptions options = new PingOptions(64, true);
+            if(Device.IPAddress != null)
+            {
+                PingReply reply = pingService.Send(Device.IPAddress);
+                if (reply.Status == IPStatus.Success)
+                {
+                    Device.isAlive = true;
+                }
+                else
+                {
+                    Device.isAlive = false;
+                }
+                _context.Device.Update(Device);
+
+                _context.SaveChanges();
+            }
+
+            
+        }
+
+        
 
     }
 }

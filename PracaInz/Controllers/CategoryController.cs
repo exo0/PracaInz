@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using PracaInz.Services;
 using PracaInz.ViewModels.CategoryViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PracaInz.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CategoryController : Controller
     {
         private CategoryServices _categoryService;
@@ -16,7 +18,13 @@ namespace PracaInz.Web.Controllers
         {
             _categoryService = categoryServices;
         }
-        
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             var vm = _categoryService.GetAllCategories();

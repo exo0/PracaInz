@@ -8,9 +8,11 @@ using PracaInz.ViewModels.DevicesViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using PracaInz.BLL;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PracaInz.Web.Controllers
 {
+    [Authorize(Roles = "Administrator,HelpDesk,User")]
     public class DevicesController : Controller
     {
         private DeviceServices _deviceServices;
@@ -27,6 +29,13 @@ namespace PracaInz.Web.Controllers
             _deviceServices = deviceServices;
             _categoryServices = categoryServices;
             _userManager = userManager;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -53,7 +62,7 @@ namespace PracaInz.Web.Controllers
             var devices = _deviceServices.GetAllDevicesFilterByUserId(User.Identity.Name);
             return PartialView("~/Views/Devices/Index.cshtml", devices);
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Add()
         {
@@ -75,7 +84,7 @@ namespace PracaInz.Web.Controllers
             });
             return View();
         }
-
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> AddAsync(NewDeviceViewModel data)
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;

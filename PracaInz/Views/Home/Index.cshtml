@@ -8,48 +8,64 @@
 @inject PracaInz.Services.TicketServices TicketService
 @inject SignInManager<User> SignInManager
 
-<h1 style="text-align: center">Dashboard skurwielu</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Inz M.Deska</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+<body>
+    <h1 style="text-align: center">Dashboard</h1>
+    <hr />
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <div class="row">
-        <div class="col-12">
-            <p style="text-align:center">Devices section</p>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="row">
+            <div class="col-12">
+                <p style="text-align:center">Devices section</p>
+            </div>
+
+            @*@await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())*@
+            @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetNormalDeviceFilteredByUser(User.Identity.Name))
+
         </div>
 
-        @*@await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())*@
-        @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetNormalDeviceFilteredByUser(User.Identity.Name))
-
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <h5 style="text-align:center">Network devices</h5>
+        <div class="row">
+            <div class="col-12">
+                <h5 style="text-align:center">Network devices</h5>
+            </div>
+            @await Html.PartialAsync("~/Views/NetworkDevices/_Index.cshtml", NetworkDeviceService.GetAllDevicesFilteredByUser(User.Identity.Name))
         </div>
-        @await Html.PartialAsync("~/Views/NetworkDevices/_Index.cshtml", NetworkDeviceService.GetAllDevicesFilteredByUser(User.Identity.Name))
-    </div>
 
-    <div class="row pt-5">
-        <div class="col-12">
-            <h5 style="text-align:center">Open tickets</h5>
+        <div class="row pt-5">
+            <div class="col-12">
+                <h5 style="text-align:center">Open tickets</h5>
+            </div>
+            @await Html.PartialAsync("~/Views/Ticket/_Index.cshtml", TicketService.GetAllOpenTicketsFilteredByUserId(User.Identity.Name))
+
         </div>
-        @await Html.PartialAsync("~/Views/Ticket/_Index.cshtml", TicketService.GetAllOpenTicketsFilteredByUserId(User.Identity.Name))
 
-    </div>
+        <div class="row pt-5">
+            <div class="col-12">
+                <h5 style="text-align:center">Closed Tickets</h5>
+            </div>
+            @await Html.PartialAsync("~/Views/Ticket/_IndexFinished.cshtml", TicketService.GetAllFinishedTicketsFilteredByUserId(User.Identity.Name))
 
-    <div class="row pt-5">
-        <div class="col-12">
-            <h5 style="text-align:center">Closed Tickets</h5>
         </div>
-        @await Html.PartialAsync("~/Views/Ticket/_IndexFinished.cshtml", TicketService.GetAllFinishedTicketsFilteredByUserId(User.Identity.Name))
-
-    </div>
-}
-else
-{
-    <h2>Please sign in to see your dashboard</h2>
-}
+    }
+    else
+    {
+        <h2 style="text-align: center">Please sign in to see your dashboard</h2>
+    }
 
 
 
 
+
+</body>
+</html>
+   

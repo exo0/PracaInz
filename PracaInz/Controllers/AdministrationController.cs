@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PracaInz.BLL;
 using PracaInz.Services;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace PracaInz.Web.Controllers
 {
+    
     public class AdministrationController : Controller
     {
         private UserRoleIdentityServices userRoleServices;
@@ -26,6 +28,15 @@ namespace PracaInz.Web.Controllers
             signInManager = _signInManager;
             userRoleServices = _userRoleServices;
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -66,12 +77,15 @@ namespace PracaInz.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
@@ -106,6 +120,8 @@ namespace PracaInz.Web.Controllers
             return View(model);
         }
 
+
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult IndexRole()
         {
@@ -113,12 +129,16 @@ namespace PracaInz.Web.Controllers
             return View(vm);
         }
 
+
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult CreateRole()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<IActionResult> CreateRole(RegisterRoleViewModel model)
         {
@@ -147,6 +167,8 @@ namespace PracaInz.Web.Controllers
             return View(model);
         }
 
+
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
@@ -180,6 +202,8 @@ namespace PracaInz.Web.Controllers
             return View(model);
         }
 
+
+        [Authorize(Roles = "Administrator")]
         // This action responds to HttpPost and receives EditRoleViewModel
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
@@ -215,21 +239,30 @@ namespace PracaInz.Web.Controllers
             }
         }
 
-
-            public IActionResult Delete(int id)
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Delete(int id)
             {
                 var vm = userRoleServices.GetRoleById(id);
                 return View(vm);
             }
 
-            public IActionResult DeleteConfirmed(int id)
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult DeleteUser(int id)
+        {
+            var vm = userRoleServices.GetUserById(id);
+            return View(vm);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult DeleteConfirmed(int id)
             {
             userRoleServices.DeleteRole(id);
                 return RedirectToAction("Index", "Role");
             }
 
-
-            [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
             public async Task<IActionResult> EditUsersInRole(string roleId)
             {
                 ViewBag.roleId = roleId;
@@ -261,7 +294,8 @@ namespace PracaInz.Web.Controllers
                 return View(model);
             }
 
-            [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
             public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
             {
                 var role = await roleManager.FindByIdAsync(roleId);

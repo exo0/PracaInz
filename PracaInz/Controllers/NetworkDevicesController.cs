@@ -83,5 +83,11 @@ namespace PracaInz.Web.Controllers
                 data.IPAddress);
             return RedirectToAction("Index", "Devices");
         }
+
+        public IActionResult DevicePingStatus(int id)
+        {
+            _networkDeviceServices.DevicePingStatus(id);
+            return RedirectToAction("Index", "Devices");
+        }
     }
 }

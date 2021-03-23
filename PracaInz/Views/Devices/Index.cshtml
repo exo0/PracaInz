@@ -1,4 +1,6 @@
 ﻿@model PracaInz.ViewModels.DevicesViewModels.DeviceListViewModel
+@inject PracaInz.Services.NetworkDeviceServices NetworkDeviceService
+@inject PracaInz.Services.DeviceServices DeviceService
 
 <div class="row">
     <div class="col-6">
@@ -8,33 +10,41 @@
         <button class="btn-info">Wyszukaj</button>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <a class="btn btn-success float-right" asp-controller="Devices" asp-action="Add">Dodaj urządzenie</a>
+<div class="row mt-1">
+    <div class="col-2 float-right">
+        <a class="btn btn-success float-right" asp-controller="Devices" asp-action="Add">Add device</a>
+    </div>
+    <div class="col-3 float-right">
+        <a class="btn btn-success float-right" asp-controller="NetworkDevices" asp-action="Add">Add network device</a>
     </div>
 
 </div>
-<div class="row">
-    <div class="col-1">ID</div>
-    <div class="col-2">Manufacturer</div>
-    <div class="col-2">Model</div>
-    <div class="col-2">S/N</div>
-    <div class="col-2">Category</div>
-    <div class="col-3">Description</div>
+<hr />
+<div class="row mt-5">
+    <div class="col-12">
+        <p style="text-align: center">All Devices</p>
+    </div>
 </div>
-@foreach(var dev in Model.Devices)
-{
-<div class="row">
-    <div class="col-1">@dev.Id</div>
-    <div class="col-2">@dev.Manufacturer</div>
-    <div class="col-2">@dev.Model</div>
-    <div class="col-2">@dev.SerialNumber</div>
-    @foreach (var cat in dev.Categories)
-    {
-        @cat.Title
-    }
-    <div class="col-3">@dev.DeviceDescription</div>
-
-
+<div class="row mt-1">
+    <div class="col-12">
+        <div class="devices" >
+            @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())
+        </div>
+        
+    </div>
 </div>
-}
+
+<div class="row mt-5">
+    <div class="col-12">
+        <p style="text-align: center">Network devices</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="devices">
+            @await Html.PartialAsync("~/Views/NetworkDevices/_Index.cshtml", NetworkDeviceService.GetAllDevices())
+        </div>
+        
+    </div>
+</div>
+

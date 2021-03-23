@@ -118,7 +118,7 @@ namespace PracaInz.Services
                 Title = title,
                 Message = message,
                 Status = (TicketStatus)0,
-                CreateTime = DateTime.Now,
+                CreateTime = DateTime.Now,       
                 Author = usr
 
 
@@ -140,7 +140,9 @@ namespace PracaInz.Services
 
             var ticket = _context.Tickets.Find(id);
             ticket.Status = (TicketStatus)1;
+            
             _context.Tickets.Update(ticket);
+            
             _context.SaveChanges();
         }
 
@@ -148,6 +150,7 @@ namespace PracaInz.Services
         {
             var ticket = _context.Tickets.Find(id);
             ticket.Status = (TicketStatus)2;
+            ticket.ClosedTime = DateTime.Now;
             _context.Tickets.Update(ticket);
             _context.SaveChanges();
         }
@@ -156,6 +159,7 @@ namespace PracaInz.Services
         {
             var ticket = _context.Tickets.Find(id);
             ticket.Status = (TicketStatus)3;
+            ticket.ClosedTime = DateTime.Now;
             _context.Tickets.Update(ticket);
             _context.SaveChanges();
         }

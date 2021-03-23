@@ -1,29 +1,60 @@
 ﻿@model PracaInz.ViewModels.DevicesViewModels.DeviceListViewModel
 
-@*<div class="row">
-    
-    <div class="col-2">Manufacturer</div>
-    <div class="col-2">Model</div>
-    <div class="col-2">S/N</div>
-    <div class="col-2">Category</div>
-    <div class="col-3">Description</div>
-</div>
-@foreach (var dev in Model.Devices)
+@if (Model.Devices.Count() > 0)
 {
-    <div class="row">
-        <div class="col-1">@dev.Id</div>
-        <div class="col-2">@dev.Manufacturer</div>
-        <div class="col-2">@dev.Model</div>
-        <div class="col-2">@dev.SerialNumber</div>
-        <div class="col-2">@dev.Categories.ToList().FirstOrDefault().ToString()</div>
-        <div class="col-3">@dev.DeviceDescription</div>
+<table class="table border border-info rounded">
+    <thead>
+        <tr>
+            <th>
+                <p>Model</p>
+            </th>
+            <th>
+                <p>Serial Number</p>
+            </th>
+            <th>
+                <p>Category</p>
+            </th>
+            <th>
+                <p>Device Description</p>
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach(var dev1 in Model.Devices)
+        {
+        <tr>
+            <td>
+                @dev1.Model
+            </td>
+            <td>
+                @dev1.SerialNumber
+            </td>
+            <td>
+                @foreach (var cat in dev1.Categories)
+                {
+                    @cat.Title
+                }
+            </td>
+            <td>
+                @dev1.DeviceDescription
+            </td>
 
 
-    </div>
-}*@
+        </tr>
+        }
+    </tbody>
+</table>
+
+}
+else
+{
+    <h5 style="text-align: center">Brak przypisanych komputerów</h5>
+}
 
 
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -74,8 +105,8 @@
         }
         else
         {
-            <h4>Brak komputerów przypisanych do Ciebie kochaniutku</h4>
+            <h4 style="text-align: center">Brak przypisanych komputerów</h4>
         }
 
     </tbody>
-</table>
+</table>*@
