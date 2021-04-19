@@ -63,8 +63,6 @@ namespace PracaInz.Services
                     Categories = x.Categories,
                     isAlive = x.isAlive,
                     IPAddress = x.IPAddress
-
-
                 })
             };
             return vm;

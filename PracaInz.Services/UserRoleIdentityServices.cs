@@ -52,6 +52,23 @@ namespace PracaInz.Services
             return vm;
         }
 
+        //public IList<User> ReturnAllUsersToDropDown()
+        //{
+        //    var UsersFromDB = context.Users.ToList();
+
+        //    IList<User> Users = new List<User>();
+
+        //    foreach(var user in UsersFromDB)
+        //    {
+        //        Users.Add(new User
+        //        {
+        //            Id = user.Id,
+        //            FirstName = user.FirstName + user.LastName
+        //        }); ;
+        //    }
+        //    return Users;
+        //}
+
         public User GetUserById(int id)
         {
             var user = context.Users.Find(id);

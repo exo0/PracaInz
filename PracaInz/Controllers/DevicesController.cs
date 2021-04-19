@@ -70,13 +70,13 @@ namespace PracaInz.Web.Controllers
             // i wrzucenie ich do rozwijanej listy która jest dostępna w View 
             // odpowiadającym za dodawanie
             var categories = _categoryServices.ReturnAllCategoryToDropDown();
-            var users = _userRoleIdentityServices.ReturnAllUsersToDropDown();
+            //var users = _userRoleIdentityServices.ReturnAllUsersToDropDown();
 
-            ViewBag.Users = users.Select(y => new SelectListItem()
-            {
-                Text = y.FirstName,
-                Value = y.Id.ToString()
-            });
+            //ViewBag.Users = users.Select(y => new SelectListItem()
+            //{
+            //    Text = y.FirstName,
+            //    Value = y.Id.ToString()
+            //});
             ViewBag.Categories = categories.Select(x => new SelectListItem()
             {
                 Text = x.Title,
@@ -102,5 +102,20 @@ namespace PracaInz.Web.Controllers
                 data.CategoryId);
             return RedirectToAction("Index", "Devices");
         }
+
+        //public IActionResult Edit(int id)
+        //{
+        //    var categories = _categoryServices.ReturnAllCategoryToDropDown();
+        //    ViewBag.Categories = categories.Select(x => new SelectListItem()
+        //    {
+        //        Text = x.Title,
+        //        Value = x.Id.ToString()
+        //    });
+
+        //    //var Users = _userRoleIdentityServices.G
+
+        //    //var vm = _deviceServices.GetDevice(id);
+        //    return View(vm);
+        //}
     }
 }

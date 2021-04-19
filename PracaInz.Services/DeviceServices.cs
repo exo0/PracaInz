@@ -139,6 +139,38 @@ namespace PracaInz.Services
             _context.SaveChanges();
         }
 
+        public void UpdateDevice(int _ID, string _Manufacturer, string _Model, string _serialNumber, string _deviceDescription,int _categoryId, int _userId)
+        {
+            var cat = _context.Categories.Find(_categoryId);
+            var User = _context.Users.Find(_userId);
+
+            var DeviceInDB = _context.Device
+                .Where(b => b.Id == _ID)
+                .Include(b => b.Categories)
+                .FirstOrDefault();
+
+            if (DeviceInDB.Categories.Count() == 0)
+            {
+
+            }
+            else
+            {
+                var currentCategory = DeviceInDB.Categories.First();
+                if(_ID == DeviceInDB.Id)
+                {
+                    DeviceInDB.Manufacturer = _Manufacturer;
+                    DeviceInDB.Model = _Model;
+                    DeviceInDB.SerialNumber = _serialNumber;
+                    DeviceInDB.DeviceDescription = _deviceDescription;
+                    DeviceInDB.Categories.Remove(currentCategory);
+                    DeviceInDB.Categories.Add(cat);
+                    DeviceInDB.UserId = _userId;
+                }
+            }
+            _context.Device.Update(DeviceInDB);
+            _context.SaveChanges();
+        }
+
 
         public void DeleteDevice(int id)
         {

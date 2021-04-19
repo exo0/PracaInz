@@ -24,17 +24,15 @@
 
     @if (SignInManager.IsSignedIn(User))
     {
-        <div class="row">
+        <div class="row pt-5">
             <div class="col-12">
-                <p style="text-align:center">Devices section</p>
+                <h5 style="text-align:center">Devices section</h5>
             </div>
-
-            @*@await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())*@
             @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetNormalDeviceFilteredByUser(User.Identity.Name))
 
         </div>
 
-        <div class="row">
+        <div class="row pt-5">
             <div class="col-12">
                 <h5 style="text-align:center">Network devices</h5>
             </div>

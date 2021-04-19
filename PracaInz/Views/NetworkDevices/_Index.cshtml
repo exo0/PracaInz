@@ -49,6 +49,10 @@
                         @dev1.DeviceDescription
                     </td>
                     <td>
+                        @if(String.IsNullOrEmpty(dev1.IPAddress) || String.IsNullOrWhiteSpace(dev1.IPAddress))
+                        {
+                            <p style="color: red">Brak adresu IP</p>
+                        }
                         @dev1.IPAddress
                     </td>
                     <td>
@@ -63,7 +67,11 @@
 
                     </td>
                     <td>
+                        @if (!(String.IsNullOrEmpty(dev1.IPAddress) || String.IsNullOrWhiteSpace(dev1.IPAddress)))
+                        {
                         <a asp-controller="NetworkDevices" asp-action="DevicePingStatus" asp-route-id="@dev1.Id">Ping</a>
+                        }
+                        
                     </td>
 
                 </tr>
