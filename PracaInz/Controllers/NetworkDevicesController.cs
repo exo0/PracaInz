@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace PracaInz.Web.Controllers
 {
@@ -87,7 +88,7 @@ namespace PracaInz.Web.Controllers
         public IActionResult DevicePingStatus(int id)
         {
             _networkDeviceServices.DevicePingStatus(id);
-            return RedirectToAction("Index", "Devices");
+            return RedirectToAction("Index","Devices");
         }
     }
 }

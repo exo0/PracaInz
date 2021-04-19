@@ -16,7 +16,7 @@
                     <p>Category</p>
                 </th>
                 <th>
-                    <p>Device Description</p>
+                    <p>Device owner</p>
                 </th>
                 <th>
                     <p>IP Address</p>
@@ -46,7 +46,7 @@
                         }
                     </td>
                     <td>
-                        @dev1.DeviceDescription
+                        @dev1.DeviceOwner.FirstName, @dev1.DeviceOwner.LastName
                     </td>
                     <td>
                         @if(String.IsNullOrEmpty(dev1.IPAddress) || String.IsNullOrWhiteSpace(dev1.IPAddress))

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace PracaInz.Services
 {
@@ -51,24 +52,32 @@ namespace PracaInz.Services
             };
             return vm;
         }
+        // TODO: Powinienem dokończyć funkcję która powinna ładnie wyświetlić użytkownika włącznie z jego: ticketami, urządzeniami
+        /// <summary>
+        /// Funkcja która ma za zadanie zwrócić usera do widoku jako view model
+        /// </summary>
+        /// <param name="id"> Przekazujemy parametr ID danego usera którego będziemy edytować </param>
+        /// <returns>Zwraca UserListItemViewModel który jest ładowany do View</returns>
+        public UserListItemViewModel GetUser(int id)
+        {
+            var user = context.Users
+                .Where(b => b.Id == id)
+                .Include(c => c.Tickets)
+                .Include(c => c.Devices)
+                .FirstOrDefault();
 
-        //public IList<User> ReturnAllUsersToDropDown()
-        //{
-        //    var UsersFromDB = context.Users.ToList();
+            var vm = new UserListItemViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Departemnt = user.Department,
+                Tickets = user.Tickets,
+                Devices = user.Devices
+            };
 
-        //    IList<User> Users = new List<User>();
-
-        //    foreach(var user in UsersFromDB)
-        //    {
-        //        Users.Add(new User
-        //        {
-        //            Id = user.Id,
-        //            FirstName = user.FirstName + user.LastName
-        //        }); ;
-        //    }
-        //    return Users;
-        //}
-
+            return vm;
+        }
         public User GetUserById(int id)
         {
             var user = context.Users.Find(id);

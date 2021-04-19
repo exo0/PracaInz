@@ -28,6 +28,7 @@ namespace PracaInz.Services
 
         public TicketListViewModel GetAllTickets()
         {
+            //TODO: automapper możliwy ?
             var vm = new TicketListViewModel()
             {
                 Tickets = _context.Tickets.Select(x => new TicketListItemViewModel
@@ -47,6 +48,7 @@ namespace PracaInz.Services
 
         public TicketListViewModel GetAllOpenTicketsFilteredByUserId(string userName)
         {
+            //TODO: automapper możliwy ?
             var vm = new TicketListViewModel()
             {
                 Tickets = _context.Tickets.Where(x=>x.Author.UserName == userName)
@@ -68,6 +70,7 @@ namespace PracaInz.Services
 
         public TicketListViewModel GetAllFinishedTicketsFilteredByUserId(string userName)
         {
+            //TODO: automapper możliwy ?
             var vm = new TicketListViewModel()
             {
                 Tickets = _context.Tickets.Where(x => x.Author.UserName == userName)
@@ -89,7 +92,7 @@ namespace PracaInz.Services
 
         public TicketListItemViewModel GetTicket(int id)
         {
-
+            //TODO: automapper możliwy ?
             var Ticket = _context.Tickets
                 .Where(b => b.Id == id)
                 .Include(b => b.Author)

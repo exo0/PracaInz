@@ -18,6 +18,7 @@ namespace PracaInz.Services
 
         public CategoryListViewModel GetAllCategories()
         {
+            //TODO: automapper możliwy ?
             var vm = new CategoryListViewModel
             {
                 Categories = _context.Categories.Select(x=> new CategoryListItemViewModel
@@ -49,6 +50,7 @@ namespace PracaInz.Services
 
         public CategoryListItemViewModel GetCategory(int id)
         {
+            //TODO: automapper możliwy ?
             var cat = _context.Categories
                 .Where(b => b.Id == id)
                 .FirstOrDefault();

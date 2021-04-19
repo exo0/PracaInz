@@ -22,6 +22,7 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetAllDevices()
         {
+            //TODO: automapper możliwy ?
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.Select(x => new DeviceListItemViewModel
@@ -31,6 +32,7 @@ namespace PracaInz.Services
                     Model = x.Model,
                     SerialNumber = x.SerialNumber,
                     DeviceDescription = x.DeviceDescription,
+                    DeviceOwner = x.DeviceOwner,
                     Categories = x.Categories
                 })
             };
@@ -39,6 +41,7 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetAllDevicesFilterByUserId(string userName)
         {
+            //TODO: automapper możliwy ?
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.Where(x=>x.DeviceOwner.UserName == userName)
@@ -48,6 +51,7 @@ namespace PracaInz.Services
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     SerialNumber = x.SerialNumber,
+                    DeviceOwner = x.DeviceOwner,
                     DeviceDescription = x.DeviceDescription,
                     Categories = x.Categories
                 })
@@ -57,6 +61,7 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetNormalDevice()
         {
+            //TODO: automapper możliwy ?
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.OfType<Device>().Select(x => new DeviceListItemViewModel
@@ -65,6 +70,7 @@ namespace PracaInz.Services
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     SerialNumber = x.SerialNumber,
+                    DeviceOwner = x.DeviceOwner,
                     DeviceDescription = x.DeviceDescription,
                     Categories = x.Categories
                 })
@@ -74,6 +80,7 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetNormalDeviceFilteredByUser(string userName)
         {
+            //TODO: automapper możliwy ?
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.OfType<Device>()
@@ -84,6 +91,7 @@ namespace PracaInz.Services
                     Manufacturer = x.Manufacturer,
                     Model = x.Model,
                     SerialNumber = x.SerialNumber,
+                    DeviceOwner = x.DeviceOwner,
                     DeviceDescription = x.DeviceDescription,
                     Categories = x.Categories
                 })
@@ -93,6 +101,7 @@ namespace PracaInz.Services
 
         public DeviceListItemViewModel GetDevice(int id)
         {
+            //TODO: automapper możliwy ?
             var Device = _context.Device
                 .Where(b => b.Id == id)
                 .Include(b => b.Categories)
@@ -122,14 +131,13 @@ namespace PracaInz.Services
             Category cat = _context.Categories.Find(categoryId);
             User usr = _context.Users.Find(userId);
 
-
+            //TODO: automapper możliwy ?
             var device = new Device
             {
                 Manufacturer = manufacturer,
                 Model = model,
                 SerialNumber = serialNumber,
                 DeviceDescription = deviceDescription,
-                //DeviceOwner = await _userManager.FindByIdAsync(userId.ToString()),
                 DeviceOwner = usr,
                 Categories = new List<Category>()
             };

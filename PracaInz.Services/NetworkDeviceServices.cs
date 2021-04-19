@@ -28,6 +28,7 @@ namespace PracaInz.Services
 
         public NetworkDeviceListViewModel GetAllDevices()
         {
+            //TODO: automapper możliwy ?
             var vm = new NetworkDeviceListViewModel()
             {
                 NetworkDevices = _context.Device.OfType<NetworkDevice>().Select(x => new NetworkDeviceListItemViewModel
@@ -37,6 +38,7 @@ namespace PracaInz.Services
                     Model = x.Model,
                     SerialNumber = x.SerialNumber,
                     DeviceDescription = x.DeviceDescription,
+                    DeviceOwner = x.DeviceOwner,
                     Categories = x.Categories,
                     isAlive = x.isAlive,
                     IPAddress = x.IPAddress
@@ -49,6 +51,7 @@ namespace PracaInz.Services
 
         public NetworkDeviceListViewModel GetAllDevicesFilteredByUser(string userName)
         {
+            //TODO: automapper możliwy ?
             var vm = new NetworkDeviceListViewModel()
             {
                 NetworkDevices = _context.Device.OfType<NetworkDevice>()
@@ -60,6 +63,7 @@ namespace PracaInz.Services
                     Model = x.Model,
                     SerialNumber = x.SerialNumber,
                     DeviceDescription = x.DeviceDescription,
+                    DeviceOwner = x.DeviceOwner,
                     Categories = x.Categories,
                     isAlive = x.isAlive,
                     IPAddress = x.IPAddress
@@ -70,6 +74,7 @@ namespace PracaInz.Services
 
         public NetworkDeviceListItemViewModel GetDevice(int id)
         {
+            //TODO: automapper możliwy ?
             var Device = _context.Device.OfType<NetworkDevice>()
                 .Where(b => b.Id == id)
                 .Include(b => b.Categories)
@@ -99,6 +104,7 @@ namespace PracaInz.Services
             int categoryId,
             string IPAddress)
         {
+            //TODO: automapper możliwy ?
             Category cat = _context.Categories.Find(categoryId);
             User usr = _context.Users.Find(userId);
 
