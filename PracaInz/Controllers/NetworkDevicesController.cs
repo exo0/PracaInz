@@ -46,6 +46,33 @@ namespace PracaInz.Web.Controllers
             _networkDeviceServices.DeleteDevice(id);
             return RedirectToAction("Index", "NetworkDevices");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var categories = _categoryServices.ReturnAllCategoryToDropDown();
+            ViewBag.Categories = categories.Select(x => new SelectListItem()
+            {
+                Text = x.Title,
+                Value = x.Id.ToString()
+            });
+            var users = _userRoleIdentityServices.ReturnAllUsersToDropDown();
+            ViewBag.Userss = users.Select(x => new SelectListItem()
+            {
+                Text = x.FirstName + x.LastName,
+                Value = x.Id.ToString()
+            });
+            var vm = _networkDeviceServices.GetDevice(id);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditDevice(int id, string manufacturer, string model, string serialNumber, string deviceDescription, int UserId, int CategoryId,string IPAddress)
+        {
+            await _networkDeviceServices.EditAsync(id, manufacturer, model, serialNumber, deviceDescription, UserId, CategoryId,IPAddress);
+            return RedirectToAction("Index", "Devices");
+        }
+        
         
         [HttpGet]
         public IActionResult Add()

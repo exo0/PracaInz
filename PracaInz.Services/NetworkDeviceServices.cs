@@ -94,6 +94,57 @@ namespace PracaInz.Services
             };
             return vm;
         }
+        /// <summary>
+        /// Function which allow us to edit existing networkDevice in database 
+        /// </summary>
+        /// <param name="_ID"></param>
+        /// <param name="_Manufacturer"></param>
+        /// <param name="_Model"></param>
+        /// <param name="_serialNumber"></param>
+        /// <param name="_deviceDescription"></param>
+        /// <param name="_userId"></param>
+        /// <param name="_categoryId"></param>
+        /// <returns></returns>
+        public async Task EditAsync(int _ID, string _Manufacturer,
+            string _Model,
+            string _serialNumber,
+            string _deviceDescription,
+            int _userId,
+            int _categoryId,
+            string _IPAddress)
+        {
+            var cat = _context.Categories.Find(_categoryId);
+            var User = _context.Users.Find(_userId);
+
+            var DeviceInDB = _context.Device
+                .OfType<NetworkDevice>()
+                .Where(b => b.Id == _ID)
+                .Include(b => b.Categories)
+                .FirstOrDefault();
+
+            if(DeviceInDB.Categories.Count() == 0)
+            {
+
+            }
+            else
+            {
+                var currentCategory = DeviceInDB.Categories.FirstOrDefault();
+
+                if(_ID == DeviceInDB.Id)
+                {
+                    DeviceInDB.Manufacturer = _Manufacturer;
+                    DeviceInDB.Model = _Model;
+                    DeviceInDB.SerialNumber = _serialNumber;
+                    DeviceInDB.DeviceDescription = _deviceDescription;
+                    DeviceInDB.IPAddress = _IPAddress;
+                    DeviceInDB.Categories.Remove(currentCategory);
+                    DeviceInDB.Categories.Add(cat);
+                    DeviceInDB.UserId = _userId;
+                }
+            }
+            _context.Device.Update(DeviceInDB);
+            _context.SaveChanges();
+        }
 
 
         public async Task AddAsync (string manufacturer,

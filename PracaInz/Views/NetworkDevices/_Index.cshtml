@@ -37,7 +37,7 @@
                         @dev1.Model
                     </td>
                     <td>
-                        @dev1.SerialNumber
+                        <a asp-controller="NetworkDevices" asp-action="Edit" asp-route-id="@dev1.Id">@dev1.SerialNumber</a>
                     </td>
                     <td>
                         @foreach (var cat in dev1.Categories)

@@ -27,10 +27,11 @@
         {
         <tr>
             <td>
+                
                 @dev1.Model
             </td>
             <td>
-                @dev1.SerialNumber
+                <a asp-controller="Devices" asp-action="Edit" asp-route-id="@dev1.Id">@dev1.SerialNumber</a>
             </td>
             <td>
                 @foreach (var cat in dev1.Categories)
@@ -58,61 +59,3 @@ else
     </div>
     
 }
-
-
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <p>ID</p>
-            </th>
-            <th>
-                <p>Model</p>
-            </th>
-            <th>
-                <p>Serial Number</p>
-            </th>
-            <th>
-                <p>Category</p>
-            </th>
-            <th>
-                <p>Device Description</p>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Devices.Count() > 0)
-        {
-            @foreach (var dev in Model.Devices)
-            {
-                <tr>
-                    <td>
-                        @dev.Id
-                    </td>
-                    <td>
-                        @dev.Model
-                    </td>
-                    <td>
-                        @dev.SerialNumber
-                    </td>
-                    <td>
-                        @foreach (var cat in dev.Categories)
-                        {
-                            @cat.Title
-                        }
-                    </td>
-                    <td>
-                        @dev.DeviceDescription
-                    </td>
-
-                </tr>
-            }
-        }
-        else
-        {
-            <h4 style="text-align: center">Brak przypisanych komputerów</h4>
-        }
-
-    </tbody>
-</table>*@

@@ -62,6 +62,7 @@ namespace PracaInz.Web.Controllers
             var devices = _deviceServices.GetAllDevicesFilterByUserId(User.Identity.Name);
             return PartialView("~/Views/Devices/Index.cshtml", devices);
         }
+        //wypierdala się 
         [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Add()
@@ -102,20 +103,32 @@ namespace PracaInz.Web.Controllers
                 data.CategoryId);
             return RedirectToAction("Index", "Devices");
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var categories = _categoryServices.ReturnAllCategoryToDropDown();
+            ViewBag.Categories = categories.Select(x => new SelectListItem()
+            {
+                Text = x.Title,
+                Value = x.Id.ToString()
+            });
 
-        //public IActionResult Edit(int id)
-        //{
-        //    var categories = _categoryServices.ReturnAllCategoryToDropDown();
-        //    ViewBag.Categories = categories.Select(x => new SelectListItem()
-        //    {
-        //        Text = x.Title,
-        //        Value = x.Id.ToString()
-        //    });
+            var users = _userRoleIdentityServices.ReturnAllUsersToDropDown();
+            ViewBag.Userss = users.Select(x=> new SelectListItem()
+            {
+                Text = x.FirstName + x.LastName,
+                Value = x.Id.ToString()
+            });
+            var vm = _deviceServices.GetDevice(id);
+            return View(vm);
+        }
 
-        //    //var Users = _userRoleIdentityServices.G
+        [HttpPost]
+        public async Task<IActionResult> EditDevice(int id, string manufacturer,string model, string serialNumber, string deviceDescription,int UserId, int CategoryId)
+        {
+            _deviceServices.UpdateDevice(id, manufacturer, model, serialNumber, deviceDescription, CategoryId, UserId);
+            return RedirectToAction("Index", "Devices");
+        }
 
-        //    //var vm = _deviceServices.GetDevice(id);
-        //    return View(vm);
-        //}
     }
 }
