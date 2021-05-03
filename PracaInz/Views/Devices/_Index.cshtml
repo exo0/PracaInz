@@ -17,6 +17,9 @@
             <th>
                 <p>Device owner</p>
             </th>
+            <th>
+                <p>Additional options</p>
+            </th>
 
 
         </tr>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @dev1.DeviceOwner.FirstName, @dev1.DeviceOwner.LastName
+            </td>
+            <td>
+                <a class="btn btn-outline-danger" asp-controller="Devices" asp-action="Delete" asp-route-id="@dev1.Id">Usuń</a>
             </td>
 
 

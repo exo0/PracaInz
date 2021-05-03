@@ -10,22 +10,22 @@
   <Class Name="PracaInz.BLL.Device">
     <Position X="4.25" Y="3.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAABAAAAAAAAAAgAAAAQAAAAAAAIAAAEAAA=</HashCode>
+      <HashCode>AAgCAAAAAAABAAAAAAAAAAgAAAEAEAAAAAgAAAAEAAA=</HashCode>
       <FileName>Device.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PracaInz.BLL.NetworkDevice">
-    <Position X="4.5" Y="0.75" Width="2" />
+    <Position X="2" Y="0.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAA=</HashCode>
       <FileName>NetworkDevice.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PracaInz.BLL.Role">
-    <Position X="11" Y="0.75" Width="1.5" />
+    <Position X="9.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Role.cs</FileName>
+      <FileName>Role\Role.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PracaInz.BLL.Ticket">
@@ -39,21 +39,21 @@
     <Position X="13.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAUAAAAAACAAAAAAAAIAg=</HashCode>
-      <FileName>User.cs</FileName>
+      <FileName>Users\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PracaInz.BLL.Admin" Collapsed="true">
     <Position X="11.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Admin.cs</FileName>
+      <FileName>Users\Admin.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PracaInz.BLL.HelpDesk" Collapsed="true">
     <Position X="14.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>HelpDesk.cs</FileName>
+      <FileName>Users\HelpDesk.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

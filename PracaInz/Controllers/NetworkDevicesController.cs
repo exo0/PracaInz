@@ -9,9 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PracaInz.Web.Controllers
 {
+    [Authorize(Roles = "Administrator,HelpDesk,User")]
     public class NetworkDevicesController : Controller
     {
         private NetworkDeviceServices _networkDeviceServices;
@@ -29,18 +31,22 @@ namespace PracaInz.Web.Controllers
             _categoryServices = categoryServices;
             _userManager = userManager;
         }
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var vm = _networkDeviceServices.GetAllDevices();
             return View(vm);
         }
-
+        [HttpGet]
+        [Authorize(Roles ="Administrator")]
         public IActionResult Delete(int id)
         {
             var vm = _networkDeviceServices.GetDevice(id);
             return View(vm);
         }
-
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteConfirmed(int id)
         {
             _networkDeviceServices.DeleteDevice(id);
@@ -112,6 +118,8 @@ namespace PracaInz.Web.Controllers
             return RedirectToAction("Index", "Devices");
         }
 
+        [HttpGet]
+        [Authorize(Roles="Administrator,HelpDesk")]
         public IActionResult DevicePingStatus(int id)
         {
             _networkDeviceServices.DevicePingStatus(id);

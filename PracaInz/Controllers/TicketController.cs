@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PracaInz.BLL;
 using PracaInz.Services;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace PracaInz.Web.Controllers
 {
+    [Authorize(Roles = "Administrator,HelpDesk,User")]
     public class TicketController : Controller
     {
         private TicketServices _ticketService;

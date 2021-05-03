@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PracaInz.BLL\PracaInz.BLL.csproj" />
+    <ProjectReference Include="..\PracaInz.DAL\PracaInz.DAL.csproj" />
+    <ProjectReference Include="..\PracaInz.Services\PracaInz.Services.csproj" />
+    <ProjectReference Include="..\PracaInz.ViewModels\PracaInz.ViewModels.csproj" />
+    <ProjectReference Include="..\PracaInz\PracaInz.Web.csproj" />
+  </ItemGroup>
+
+</Project>

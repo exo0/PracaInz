@@ -47,24 +47,25 @@ namespace PracaInz.Web.Controllers
             return RedirectToAction("Index", "Category");
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var vm = _categoryService.GetCategory(id);
             return View(vm);
         }
-
+        [HttpPost]
         public IActionResult EditCategory(int id,string title)
         {
             _categoryService.UpdateCategory(id, title);
             return RedirectToAction("Index", "Category");
         }
-
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var vm = _categoryService.GetCategory(id);
             return View(vm);
         }
-
+        [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
             _categoryService.DeleteCat(id);

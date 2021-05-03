@@ -44,18 +44,19 @@ namespace PracaInz.Web.Controllers
             var vm = _deviceServices.GetAllDevices();
             return View(vm);
         }
-
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var vm = _deviceServices.GetDevice(id);
             return View(vm);
         }
+        [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
             _deviceServices.DeleteDevice(id);
             return RedirectToAction("Index", "Devices");
         }
-
+        [HttpGet]
         public IActionResult GetYourDevices(int id)
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
