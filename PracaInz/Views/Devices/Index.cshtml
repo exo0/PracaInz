@@ -2,24 +2,17 @@
 @inject PracaInz.Services.NetworkDeviceServices NetworkDeviceService
 @inject PracaInz.Services.DeviceServices DeviceService
 
-<div class="row">
-    <div class="col-6">
-        <p>Miejsce na wyszukiwarke</p>
-    </div>
-    <div class="col-2">
-        <button class="btn-info">Wyszukaj</button>
-    </div>
-</div>
+
 <div class="row mt-1">
     <div class="col-12">
         <a class="btn btn-success float-right" asp-controller="Devices" asp-action="Add">Add device</a>
         <a class="btn btn-success float-right" asp-controller="NetworkDevices" asp-action="Add">Add network device</a>
     </div>
     <div class="col-2 float-right">
-        
+
     </div>
     <div class="col-3 float-right">
-        
+
     </div>
 
 </div>
@@ -29,12 +22,27 @@
         <p style="text-align: center">All Devices</p>
     </div>
 </div>
+<!-- TODO: do wywalenia prawdopodobnie-->
+<div class="row">
+    <div class="col-12">
+        <div class="float-left">
+            <form asp-controller="Devices" asp-action="Index" method="get">
+                <p>
+                    Serial number: <input type="text" id="searchStr" name="SearchString" />
+                    <input type="submit" value="Filter" />
+                </p>
+            </form>
+        </div>
+
+    </div>
+</div>
 <div class="row mt-1">
     <div class="col-12">
-        <div class="devices" >
+        <div class="devices">
+
             @await Html.PartialAsync("~/Views/Devices/_Index.cshtml", DeviceService.GetAllDevices())
         </div>
-        
+
     </div>
 </div>
 
@@ -43,12 +51,26 @@
         <p style="text-align: center">Network devices</p>
     </div>
 </div>
+<!-- TODO: do wywalenia prawdopodobnie-->
+<div class="row">
+    <div class="col-12">
+        <div class="float-left">
+            <form asp-controller="NetworkDevices" asp-action="Index" method="get">
+                <p>
+                    Serial number: <input type="text" name="SearchString" />
+                    <input type="submit" value="Filter" />
+                </p>
+            </form>
+        </div>
+
+    </div>
+</div>
 <div class="row mt-1">
     <div class="col-12">
         <div class="devices">
             @await Html.PartialAsync("~/Views/NetworkDevices/_Index.cshtml", NetworkDeviceService.GetAllDevices())
         </div>
-        
+
     </div>
 </div>
 

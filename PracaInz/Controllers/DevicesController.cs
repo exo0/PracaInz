@@ -39,9 +39,19 @@ namespace PracaInz.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
-            var vm = _deviceServices.GetAllDevices();
+            var vm = new ViewModels.DevicesViewModels.DeviceListViewModel();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vm = _deviceServices.GetAllDevicesFilteredBySearch(searchString);
+            }
+            else
+            {
+                vm = _deviceServices.GetAllDevices();
+            }
+            
             return View(vm);
         }
         [HttpGet]

@@ -32,10 +32,25 @@ namespace PracaInz.Web.Controllers
             _userManager = userManager;
         }
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Index()
         {
             var vm = _networkDeviceServices.GetAllDevices();
+            return View(vm);
+        }
+
+        [HttpGet]
+        public IActionResult Index(string searchstring)
+        {
+            var vm = new ViewModels.NetworkDevicesViewModels.NetworkDeviceListViewModel();
+            if (!String.IsNullOrEmpty(searchstring))
+            {
+                vm = _networkDeviceServices.GetAllDevicesFilteredBySearch(searchstring);
+            }
+            else
+            {
+                vm = _networkDeviceServices.GetAllDevices();
+            }
+
             return View(vm);
         }
         [HttpGet]

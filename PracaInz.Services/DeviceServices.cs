@@ -59,6 +59,28 @@ namespace PracaInz.Services
             return vm;
         }
 
+        public DeviceListViewModel GetAllDevicesFilteredBySearch(string searchString)
+        {
+            var vm = new DeviceListViewModel
+            {
+                Devices = _context.Device
+                .Include(e => e.Categories)
+                .Where(x => x.SerialNumber.Contains(searchString))
+                .Select(x => new DeviceListItemViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    SerialNumber = x.SerialNumber,
+                    DeviceOwner = x.DeviceOwner,
+                    DeviceDescription = x.DeviceDescription,
+                    Categories = x.Categories
+                })
+            };
+
+            return vm;
+        }
+
         public DeviceListViewModel GetNormalDevice()
         {
             //TODO: automapper możliwy ?

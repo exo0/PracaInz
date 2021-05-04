@@ -48,7 +48,41 @@ namespace PracaInz.Services
             };
             return vm;
         }
+        /// <summary>
+        /// Funkcja która zwraca urządzenia sieciowe, które spełniają wymagany SerialNumber 
+        /// </summary>
+        /// <param name="searchString">Zmienna która przechowuje string po którym filtrujemy</param>
+        /// <returns>Funkcja zwraca listę NetworkDeviceListViewModel</returns>
+        public NetworkDeviceListViewModel GetAllDevicesFilteredBySearch(string searchString)
+        {
+            var vm = new NetworkDeviceListViewModel
+            {
+                NetworkDevices = _context.Device.OfType<NetworkDevice>()
+                .Include(e => e.Categories)
+                .Where(x => x.SerialNumber.Contains(searchString))
+                .Select(x => new NetworkDeviceListItemViewModel
+                {
+                    Id = x.Id,
+                    Manufacturer = x.Manufacturer,
+                    Model = x.Model,
+                    SerialNumber = x.SerialNumber,
+                    DeviceOwner = x.DeviceOwner,
+                    DeviceDescription = x.DeviceDescription,
+                    Categories = x.Categories,
+                    IsAlive = x.isAlive,
+                    IPAddress = x.IPAddress
+                })
+            };
 
+            return vm;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public NetworkDeviceListViewModel GetAllDevicesFilteredByUser(string userName)
         {
             //TODO: automapper możliwy ?
