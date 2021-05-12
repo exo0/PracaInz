@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PracaInz.BLL;
 using PracaInz.DAL.EF;
@@ -13,11 +14,13 @@ namespace PracaInz.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
-        public DeviceServices(ApplicationDbContext context, UserManager<User> userManager)
+        private readonly IMapper _mapper;
+
+        public DeviceServices(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
-
+            _mapper = mapper;
         }
 
         public DeviceListViewModel GetAllDevices()
@@ -80,11 +83,15 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetNormalDeviceFilteredByUser(string userName)
         {
-            //TODO: automapper możliwy ?
+            //var vm1 = _context.Device.OfType<Device>()
+            //    .Where(x => x.DeviceOwner.UserName == userName)
+            //    .Include(x=> x.Categories)
+            //    .Include(x=>x.DeviceOwner);
+            //var devicesDtos = _mapper.Map<IQueryable<Device>>(vm1);    
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.OfType<Device>()
-                .Where(x=>x.DeviceOwner.UserName == userName)
+                .Where(x => x.DeviceOwner.UserName == userName)
                 .Select(x => new DeviceListItemViewModel
                 {
                     Id = x.Id,
@@ -101,24 +108,12 @@ namespace PracaInz.Services
 
         public DeviceListItemViewModel GetDevice(int id)
         {
-            //TODO: automapper możliwy ?
             var Device = _context.Device
                 .Where(b => b.Id == id)
                 .Include(b => b.Categories)
                 .FirstOrDefault();
-
-            var vm = new DeviceListItemViewModel
-            {
-                Id = Device.Id,
-                Manufacturer = Device.Manufacturer,
-                Model = Device.Model,
-                SerialNumber = Device.SerialNumber,
-                DeviceOwner = Device.DeviceOwner,
-                DeviceDescription = Device.DeviceDescription,
-                Categories = Device.Categories
-            };
-
-            return vm;
+            var vm1 = _mapper.Map<DeviceListItemViewModel>(Device);
+            return vm1;
         }
 
         public async Task AddAsync(string manufacturer,
@@ -130,8 +125,6 @@ namespace PracaInz.Services
         {
             Category cat = _context.Categories.Find(categoryId);
             User usr = _context.Users.Find(userId);
-
-            //TODO: automapper możliwy ?
             var device = new Device
             {
                 Manufacturer = manufacturer,
@@ -141,7 +134,6 @@ namespace PracaInz.Services
                 DeviceOwner = usr,
                 Categories = new List<Category>()
             };
-
             device.Categories.Add(cat);
             _context.Device.Add(device);
             _context.SaveChanges();

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
+using AutoMapper;
 
 namespace PracaInz.Services
 {
@@ -19,11 +20,13 @@ namespace PracaInz.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public NetworkDeviceServices(ApplicationDbContext context, UserManager<User> userManager)
+        public NetworkDeviceServices(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public NetworkDeviceListViewModel GetAllDevices()
@@ -74,25 +77,12 @@ namespace PracaInz.Services
 
         public NetworkDeviceListItemViewModel GetDevice(int id)
         {
-            //TODO: automapper możliwy ?
             var Device = _context.Device.OfType<NetworkDevice>()
                 .Where(b => b.Id == id)
                 .Include(b => b.Categories)
                 .FirstOrDefault();
-
-            var vm = new NetworkDeviceListItemViewModel
-            {
-                Id = Device.Id,
-                Manufacturer = Device.Manufacturer,
-                Model = Device.Model,
-                SerialNumber = Device.SerialNumber,
-                DeviceOwner = Device.DeviceOwner,
-                DeviceDescription = Device.DeviceDescription,
-                Categories = Device.Categories,
-                isAlive = Device.isAlive,
-                IPAddress = Device.IPAddress
-            };
-            return vm;
+            var vm1 = _mapper.Map<NetworkDeviceListItemViewModel>(Device);
+            return vm1;
         }
         /// <summary>
         /// Function which allow us to edit existing networkDevice in database 

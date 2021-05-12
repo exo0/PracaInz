@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PracaInz.BLL;
@@ -17,12 +18,13 @@ namespace PracaInz.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public TicketServices(ApplicationDbContext context, UserManager<User> userManager)
+        public TicketServices(ApplicationDbContext context, UserManager<User> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
-
+            _mapper = mapper;
         }
 
 
@@ -92,25 +94,12 @@ namespace PracaInz.Services
 
         public TicketListItemViewModel GetTicket(int id)
         {
-            //TODO: automapper możliwy ?
             var Ticket = _context.Tickets
                 .Where(b => b.Id == id)
                 .Include(b => b.Author)
                 .FirstOrDefault();
-
-            var vm = new TicketListItemViewModel
-            {
-                Id = Ticket.Id,
-                Title = Ticket.Title,
-                Message = Ticket.Message,
-                Status = Ticket.Status,
-                CreateTime = Ticket.CreateTime,
-                ClosedTime = Ticket.ClosedTime,
-                Author = Ticket.Author,
-                AuthorId = Ticket.AuthorId
-
-            };
-            return vm;
+            var vm1 = _mapper.Map<TicketListItemViewModel>(Ticket);
+            return vm1;
         }
 
         public async Task AddTicket(string title, string message,int userId)

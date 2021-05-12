@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using PracaInz.BLL;
+using PracaInz.ViewModels.TicketViewModels;
+
 
 namespace PracaInz.Services.MapProfiles
 {
-    class TicketMappingProfiles
+    public class TicketMappingProfiles : Profile
     {
+        public TicketMappingProfiles()
+        {
+            CreateMap<Ticket, TicketListItemViewModel>();
+        }
     }
 }
