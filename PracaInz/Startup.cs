@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using PracaInz.BLL;
 using PracaInz.DAL.EF;
 using PracaInz.Services;
+using PracaInz.Services.MapProfiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace PracaInz.Web
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup), typeof(CategoryMappingProfiles));
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<DeviceServices>();

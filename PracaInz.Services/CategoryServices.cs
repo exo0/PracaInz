@@ -1,4 +1,5 @@
-﻿using PracaInz.BLL;
+﻿using AutoMapper;
+using PracaInz.BLL;
 using PracaInz.DAL.EF;
 using PracaInz.ViewModels.CategoryViewModels;
 using System;
@@ -11,14 +12,16 @@ namespace PracaInz.Services
     public class CategoryServices
     {
         private readonly ApplicationDbContext _context;
-        public CategoryServices(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+
+        public CategoryServices(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public CategoryListViewModel GetAllCategories()
         {
-            //TODO: automapper możliwy ?
             var vm = new CategoryListViewModel
             {
                 Categories = _context.Categories.Select(x=> new CategoryListItemViewModel
@@ -50,19 +53,11 @@ namespace PracaInz.Services
 
         public CategoryListItemViewModel GetCategory(int id)
         {
-            //TODO: automapper możliwy ?
             var cat = _context.Categories
                 .Where(b => b.Id == id)
                 .FirstOrDefault();
-
-            var vm = new CategoryListItemViewModel
-            {
-                Id = cat.Id,
-                Title = cat.Title,
-                Devices = cat.Devices
-            };
-
-            return vm;
+            var vm1 = _mapper.Map<CategoryListItemViewModel>(cat);
+            return vm1;
         }
 
 
