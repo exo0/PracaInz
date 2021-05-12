@@ -26,7 +26,7 @@ namespace PracaInz.Services
             _userManager = userManager;
             _mapper = mapper;
         }
-
+        //TODO: Pozostało dodać automapper dla list które są zwracane :) Trzeba jakoś to zamapować 
 
         public TicketListViewModel GetAllTickets()
         {
