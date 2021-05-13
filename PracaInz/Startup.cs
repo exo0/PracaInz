@@ -41,7 +41,11 @@ namespace PracaInz.Web
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddAutoMapper(typeof(Startup), typeof(CategoryMappingProfiles), typeof(NetworkDeviceMappingProfile),typeof(TicketMappingProfiles), typeof(DeviceMappingProfiles));
+            services.AddAutoMapper(typeof(Startup),
+                typeof(CategoryMappingProfiles),
+                typeof(NetworkDeviceMappingProfile),
+                typeof(TicketMappingProfiles),
+                typeof(DeviceMappingProfiles));
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<DeviceServices>();
