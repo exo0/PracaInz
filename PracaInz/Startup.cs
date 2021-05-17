@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -48,6 +48,7 @@ namespace PracaInz.Web
                 typeof(DeviceMappingProfiles));
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSwaggerGen();
             services.AddTransient<DeviceServices>();
             services.AddTransient<CategoryServices>();
             services.AddTransient<NetworkDeviceServices>();
@@ -71,6 +72,11 @@ namespace PracaInz.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseRouting();
 

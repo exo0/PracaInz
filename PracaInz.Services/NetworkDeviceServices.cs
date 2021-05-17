@@ -145,7 +145,6 @@ namespace PracaInz.Services
             int categoryId,
             string IPAddress)
         {
-            //TODO: automapper możliwy ?
             Category cat = _context.Categories.Find(categoryId);
             User usr = _context.Users.Find(userId);
 

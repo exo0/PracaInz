@@ -24,8 +24,7 @@ namespace PracaInz.Services
         }
 
         public DeviceListViewModel GetAllDevices()
-        {
-            //TODO: automapper możliwy ?
+        { 
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.Select(x => new DeviceListItemViewModel
@@ -44,7 +43,6 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetAllDevicesFilterByUserId(string userName)
         {
-            //TODO: automapper możliwy ?
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.Where(x=>x.DeviceOwner.UserName == userName)
@@ -64,7 +62,6 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetNormalDevice()
         {
-            //TODO: automapper możliwy ?
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.OfType<Device>().Select(x => new DeviceListItemViewModel
@@ -83,11 +80,6 @@ namespace PracaInz.Services
 
         public DeviceListViewModel GetNormalDeviceFilteredByUser(string userName)
         {
-            //var vm1 = _context.Device.OfType<Device>()
-            //    .Where(x => x.DeviceOwner.UserName == userName)
-            //    .Include(x=> x.Categories)
-            //    .Include(x=>x.DeviceOwner);
-            //var devicesDtos = _mapper.Map<IQueryable<Device>>(vm1);    
             var vm = new DeviceListViewModel()
             {
                 Devices = _context.Device.OfType<Device>()

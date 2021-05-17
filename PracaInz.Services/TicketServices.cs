@@ -26,11 +26,8 @@ namespace PracaInz.Services
             _userManager = userManager;
             _mapper = mapper;
         }
-        //TODO: Pozostało dodać automapper dla list które są zwracane :) Trzeba jakoś to zamapować 
-
         public TicketListViewModel GetAllTickets()
         {
-            //TODO: automapper możliwy ?
             var vm = new TicketListViewModel()
             {
                 Tickets = _context.Tickets.Select(x => new TicketListItemViewModel
@@ -50,7 +47,6 @@ namespace PracaInz.Services
 
         public TicketListViewModel GetAllOpenTicketsFilteredByUserId(string userName)
         {
-            //TODO: automapper możliwy ?
             var vm = new TicketListViewModel()
             {
                 Tickets = _context.Tickets.Where(x=>x.Author.UserName == userName)
@@ -72,7 +68,6 @@ namespace PracaInz.Services
 
         public TicketListViewModel GetAllFinishedTicketsFilteredByUserId(string userName)
         {
-            //TODO: automapper możliwy ?
             var vm = new TicketListViewModel()
             {
                 Tickets = _context.Tickets.Where(x => x.Author.UserName == userName)
