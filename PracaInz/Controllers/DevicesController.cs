@@ -50,7 +50,7 @@ namespace PracaInz.Web.Controllers
             var vm = _deviceServices.GetDevice(id);
             return View(vm);
         }
-        [HttpPost]
+       
         public IActionResult DeleteConfirmed(int id)
         {
             _deviceServices.DeleteDevice(id);

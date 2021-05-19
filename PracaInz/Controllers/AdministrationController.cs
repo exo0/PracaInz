@@ -255,6 +255,13 @@ namespace PracaInz.Web.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        public IActionResult DeleteUserConfirmed(int id)
+        {
+            userRoleServices.DeleteUser(id);
+            return RedirectToAction("Index", "Administration");
+        }
+
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteConfirmed(int id)
             {
             userRoleServices.DeleteRole(id);
