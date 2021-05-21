@@ -1,0 +1,29 @@
+﻿@model PracaInz.ViewModels.TicketViewModels.TicketListItemViewModel
+
+ <div class="row">
+     <div class="col-4">
+         <h3 style="color: brown"> Tytuł ticketa: @Model.Title.</h3>
+         <h4 style="color: brown">Autor ticketu: @Model.Author</h4>
+         
+     </div>
+     
+ </div>
+<div>
+    <div class="row">
+        <h2>Message: @Model.Message</h2>
+    </div>
+</div>
+
+ <div class="row">
+     <div class="col-12">
+         Czy na pewno chcesz usunac ticket ?
+     </div>
+ </div>
+<div class="row">
+    <div class="col-3">
+        <a class="btn btn-info float-right"asp-controller="Ticket" asp-action="Index">Nie</a>
+    </div>
+    <div class="col-3">
+        <a class="btn btn-info float-right" asp-controller="Ticket" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Tak</a>
+    </div>
+</div>

@@ -118,6 +118,7 @@ namespace PracaInz.Services
         {
             var ticket = _context.Tickets.Find(id);
             _context.Tickets.Remove(ticket);
+            _context.SaveChanges();
             
         }
 

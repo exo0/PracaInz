@@ -70,7 +70,7 @@ namespace PracaInz.Web.Controllers
             return View(vm);
         }
 
-        [HttpPost]
+        
         public IActionResult DeleteConfirmed(int id)
         {
             _ticketService.DeleteTicket(id);

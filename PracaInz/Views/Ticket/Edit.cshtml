@@ -12,5 +12,6 @@
     <a class="btn btn-warning" asp-controller="Ticket" asp-action="FinishTicketUnresolved" asp-route-id="@Model.Id">Close without success</a>
     <a class="btn btn-success"  asp-controller="Ticket" asp-action="FinishTicketSuccesfully" asp-route-id="@Model.Id">Close with success</a>
     <a class="btn btn-lg" asp-controller="Ticket" asp-action="PostponeTicket" asp-route-id="@Model.Id">Postpone ticket</a>
+    <a class="btn btn-outline-warning" asp-controller="Ticket" asp-action="Delete" asp-route-id="@Model.Id">Delete Ticket</a>
 
 </div>
