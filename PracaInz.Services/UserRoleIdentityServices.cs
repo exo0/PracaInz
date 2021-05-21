@@ -52,7 +52,7 @@ namespace PracaInz.Services
             };
             return vm;
         }
-        // TODO: Powinienem dokończyć funkcję która powinna ładnie wyświetlić użytkownika włącznie z jego: ticketami, urządzeniami
+        
         /// <summary>
         /// Funkcja która ma za zadanie zwrócić usera do widoku jako view model
         /// </summary>
@@ -115,7 +115,6 @@ namespace PracaInz.Services
         }
         #endregion
 
-        // not implemented yet (currently running via Controller 
         #region Role
         public void AddRole()
         {

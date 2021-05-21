@@ -63,14 +63,10 @@ namespace PracaInz.Web.Controllers
             var devices = _deviceServices.GetAllDevicesFilterByUserId(User.Identity.Name);
             return PartialView("~/Views/Devices/Index.cshtml", devices);
         }
-        //wypierdala się 
         [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Add()
         {
-            // Kawałek kodu który odpowiada za probranie z bazy wszystkich kategorii
-            // i wrzucenie ich do rozwijanej listy która jest dostępna w View 
-            // odpowiadającym za dodawanie
             var categories = _categoryServices.ReturnAllCategoryToDropDown();
             var users = _userRoleIdentityServices.ReturnAllUsersToDropDown();
 
