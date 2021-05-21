@@ -85,6 +85,11 @@ namespace PracaInz.Services
             return user;
         }
 
+        //public void UpdateUser(id,firstName, lastName, department)
+        //{
+        //    var 
+        //}
+
         public void DeleteUser(int id)
         {
             var user = context.Users.Find(id);

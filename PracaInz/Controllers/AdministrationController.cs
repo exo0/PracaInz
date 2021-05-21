@@ -245,7 +245,21 @@ namespace PracaInz.Web.Controllers
                 var vm = userRoleServices.GetRoleById(id);
                 return View(vm);
             }
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var vm = userRoleServices.GetUser(id);
+            return View(vm);
+        }
 
+        //[Authorize(Roles ="Administrator")]
+        //[HttpGet]
+        //public async Task<IActionResult> EditUser(int id,string firstName, string lastName, string department)
+        //{
+        //    userRoleServices.UpdateUser(id,firstName, lastName, department);
+        //    return RedirectToAction("Index", "Administration");
+        //}
 
         [Authorize(Roles = "Administrator")]
         public IActionResult DeleteUser(int id)
