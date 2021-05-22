@@ -1,20 +1,20 @@
 ﻿@model PracaInz.BLL.User
 <div class="row">
     <div class="col-9">
-        <h1 style="color: #dbc16c;">Tytuł: @Model.FirstName + @Model.LastName</h1>
+        <h1 style="color: #dbc16c;">Name: @Model.FirstName + @Model.LastName</h1>
     </div>
 
 </div>
 <div class="row mt-3">
     <div class="col-12">
-        <p class="text-center">Czy na pewno chcesz usunąć użytkownika ?</p>
+        <p class="text-center">Do you really want to delete the user ?</p>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <a class="btn btn-info float-right" asp-controller="Administration" asp-action="Index">Nie</a>
+        <a class="btn btn-info float-right" asp-controller="Administration" asp-action="Index">No</a>
     </div>
     <div class="col-6">
-        <a class="btn btn-danger float-left" asp-controller="Administration" asp-action="DeleteUserConfirmed" asp-route-id="@Model.Id">Tak</a>
+        <a class="btn btn-danger float-left" asp-controller="Administration" asp-action="DeleteUserConfirmed" asp-route-id="@Model.Id">Yes</a>
     </div>
 </div>

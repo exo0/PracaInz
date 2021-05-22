@@ -12,7 +12,7 @@ namespace PracaInz.ViewModels.AdministrationViewModels
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Departemnt { get; set; }
+        public string Department { get; set; }
         public IList<Ticket> Tickets { get; set; }
         public IList<Device> Devices { get; set; }
 

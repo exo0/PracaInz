@@ -45,7 +45,7 @@ namespace PracaInz.Services
                     Id = x.Id,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
-                    Departemnt = x.Department,
+                    Department = x.Department,
                     Tickets = x.Tickets,
                     Devices = x.Devices
                 })
@@ -71,7 +71,7 @@ namespace PracaInz.Services
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Departemnt = user.Department,
+                Department = user.Department,
                 Tickets = user.Tickets,
                 Devices = user.Devices
             };
@@ -85,10 +85,25 @@ namespace PracaInz.Services
             return user;
         }
 
-        //public void UpdateUser(id,firstName, lastName, department)
-        //{
-        //    var 
-        //}
+        public void UpdateUser(int id, string firstName, string lastName, string department)
+        {
+            var userInDB = context.Users
+                .Where(b => b.Id == id)
+                .Include(b => b.Tickets)
+                .Include(b => b.Devices)
+                .FirstOrDefault();
+
+            if(id == userInDB.Id)
+            {
+                userInDB.FirstName = firstName;
+                userInDB.LastName = lastName;
+                userInDB.Department = department;
+            }
+
+            context.Users.Update(userInDB);
+            context.SaveChanges();
+
+        }
 
         public void DeleteUser(int id)
         {

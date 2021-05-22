@@ -2,8 +2,8 @@
 
  <div class="row">
      <div class="col-4">
-         <h3 style="color: brown"> Tytuł ticketa: @Model.Title.</h3>
-         <h4 style="color: brown">Autor ticketu: @Model.Author</h4>
+         <h3 style="color: brown"> Ticket title: @Model.Title.</h3>
+         <h4 style="color: brown">Ticket author: @Model.Author</h4>
          
      </div>
      
@@ -16,14 +16,14 @@
 
  <div class="row">
      <div class="col-12">
-         Czy na pewno chcesz usunac ticket ?
+         Do you really want to delete the ticket ?
      </div>
  </div>
 <div class="row">
     <div class="col-3">
-        <a class="btn btn-info float-right"asp-controller="Ticket" asp-action="Index">Nie</a>
+        <a class="btn btn-info float-right"asp-controller="Ticket" asp-action="Index">No</a>
     </div>
     <div class="col-3">
-        <a class="btn btn-info float-right" asp-controller="Ticket" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Tak</a>
+        <a class="btn btn-info float-right" asp-controller="Ticket" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Yes</a>
     </div>
 </div>

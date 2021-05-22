@@ -204,7 +204,6 @@ namespace PracaInz.Web.Controllers
 
 
         [Authorize(Roles = "Administrator")]
-        // This action responds to HttpPost and receives EditRoleViewModel
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
@@ -247,19 +246,18 @@ namespace PracaInz.Web.Controllers
             }
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> EditUser(int id)
         {
             var vm = userRoleServices.GetUser(id);
             return View(vm);
         }
 
-        //[Authorize(Roles ="Administrator")]
-        //[HttpGet]
-        //public async Task<IActionResult> EditUser(int id,string firstName, string lastName, string department)
-        //{
-        //    userRoleServices.UpdateUser(id,firstName, lastName, department);
-        //    return RedirectToAction("Index", "Administration");
-        //}
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> EditUserConfirmed(int id, string firstName, string lastName, string department)
+        {
+            userRoleServices.UpdateUser(id, firstName, lastName, department);
+            return RedirectToAction("Index", "Administration");
+        }
 
         [Authorize(Roles = "Administrator")]
         public IActionResult DeleteUser(int id)

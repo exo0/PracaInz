@@ -13,14 +13,14 @@
 
  <div class="row">
      <div class="col-12">
-         Czy na pewno chcesz usunac kategorie ?
+         Do you really want to delete device ?
      </div>
  </div>
 <div class="row">
     <div class="col-3">
-        <a class="btn btn-info float-right"asp-controller="Device" asp-action="Index">Nie</a>
+        <a class="btn btn-info float-right"asp-controller="Device" asp-action="Index">No</a>
     </div>
     <div class="col-3">
-        <a class="btn btn-info float-right" asp-controller="Devices" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Tak</a>
+        <a class="btn btn-info float-right" asp-controller="Devices" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Yes</a>
     </div>
 </div>

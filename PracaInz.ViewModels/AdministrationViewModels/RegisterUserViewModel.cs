@@ -24,6 +24,9 @@ namespace PracaInz.ViewModels.AdministrationViewModels
         public string LastName { get; set; }
 
         [Required]
+        public string Department { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

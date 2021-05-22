@@ -7,14 +7,14 @@
 
 <div class="row">
     <div class="col-12">
-        Czy na pewno chcesz usunac kategorie ?
+        Do you really want to delete the category ?
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <a class="btn btn-info float-right" asp-controller="Category" asp-action="Index">Nie</a>
+        <a class="btn btn-info float-right" asp-controller="Category" asp-action="Index">No</a>
     </div>
     <div class="col-6">
-        <a class="btn btn-danger float-left" asp-controller="Category" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">TAK</a>
+        <a class="btn btn-danger float-left" asp-controller="Category" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Yes</a>
     </div>
 </div>

@@ -51,7 +51,7 @@
                     <td>
                         @if(String.IsNullOrEmpty(dev1.IPAddress) || String.IsNullOrWhiteSpace(dev1.IPAddress))
                         {
-                            <p style="color: red">Brak adresu IP</p>
+                            <p style="color: red">IP Address is missing</p>
                         }
                         @dev1.IPAddress
                     </td>
@@ -81,5 +81,5 @@
 }
 else
 {
-    <h5 style="text-align: center">Brak przypisanych urządzeń sieciowych</h5>
+    <h5 style="text-align: center">No network devices assigned</h5>
 }

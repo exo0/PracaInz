@@ -1,26 +1,21 @@
 ﻿@model PracaInz.BLL.Role 
 <div class="row">
     <div class="col-9">
-        <h1 style="color: #dbc16c;">Tytuł: @Model.Name</h1>
+        <h1 style="color: #dbc16c;">Role title: @Model.Name</h1>
     </div>
 
 </div>
-<div class="row">
 
-    <div class="col-6">
-        Lista osób: miejsce na wypisanie usterow // brak metody
-    </div>
-</div>
 <div class="row mt-3">
     <div class="col-12">
-        <p class="text-center">Czy na pewno chcesz usunac role ?</p>
+        <p class="text-center">Do you want to delete the role?</p>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
-        <a class="btn btn-info float-right" asp-controller="Administration" asp-action="IndexRole">Nie</a>
+        <a class="btn btn-info float-right" asp-controller="Administration" asp-action="IndexRole">No</a>
     </div>
     <div class="col-6">
-        <a class="btn btn-danger float-left" asp-controller="Administration" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">TAK</a>
+        <a class="btn btn-danger float-left" asp-controller="Administration" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">Yes</a>
     </div>
 </div>

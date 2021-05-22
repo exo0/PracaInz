@@ -12,7 +12,7 @@
 <body>
     <div class="row">
         <div class="col-6 float-right">
-            <a class="btn btn-success" asp-controller="Ticket" asp-action="Add">Dodaj ticket</a>
+            <a class="btn btn-success" asp-controller="Ticket" asp-action="Add">Add ticket</a>
         </div>
 
     </div>
@@ -67,7 +67,7 @@
     {
         <div class="row">
             <div class="col-12">
-                <h5 style="text-align:center">Brak ticketów w bazie danych</h5>
+                <h5 style="text-align:center">There are no tickets in the database</h5>
             </div>
             
         </div>
@@ -75,63 +75,3 @@
     }
 </body>
 </html>
-
-@*<table class="table pt-3 border border-info rounded">
-
-    <tbody>
-        @if (Model.Tickets.Count() > 0)
-        {
-        <thead>
-            <tr>
-                <th>
-                    <p>Id</p>
-                </th>
-                <th>
-                    <p>Title</p>
-                </th>
-                <th>
-                    <p>Message</p>
-                </th>
-                <th>
-                    <p>Status</p>
-                </th>
-                <th>
-                    <p>Created Time</p>
-                <th>
-                    <p>Closed Time</p>
-                </th>
-
-            </tr>
-        </thead>
-        @foreach (var ticket in Model.Tickets)
-        {
-            <tr>
-                <td>
-                    @ticket.Id
-                </td>
-                <td>
-                    @ticket.Title
-                </td>
-                <td>
-                    @ticket.Message
-                </td>
-                <td>
-                    @ticket.Status
-                </td>
-                <td>
-                    @ticket.CreateTime
-                </td>
-                <td>
-                    @ticket.CreateTime
-                </td>
-            </tr>
-        }
-    }
-    else
-    {
-
-
-    }
-
-        </tbody>
-    </table>*@
