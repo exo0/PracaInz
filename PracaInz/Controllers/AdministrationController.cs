@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace PracaInz.Web.Controllers
 {
-    
     public class AdministrationController : Controller
     {
         private UserRoleIdentityServices userRoleServices;
@@ -38,6 +37,9 @@ namespace PracaInz.Web.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpGet]
+        ///<summary>
+        ///Cos tam
+        ///</summary>
         public IActionResult Index()
         {
             var vm = userRoleServices.GetAllUsers();
