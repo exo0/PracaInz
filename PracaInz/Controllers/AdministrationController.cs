@@ -37,9 +37,6 @@ namespace PracaInz.Web.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        ///<summary>
-        ///Cos tam
-        ///</summary>
         public IActionResult Index()
         {
             var vm = userRoleServices.GetAllUsers();
