@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -47,6 +48,10 @@ namespace PracaInz.Web
                 typeof(TicketMappingProfiles),
                 typeof(DeviceMappingProfiles));
             services.AddControllersWithViews();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
+            });
             services.AddRazorPages();
             services.AddSwaggerGen();
             services.AddTransient<DeviceServices>();

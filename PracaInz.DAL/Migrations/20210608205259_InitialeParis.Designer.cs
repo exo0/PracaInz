@@ -10,8 +10,8 @@ using PracaInz.DAL.EF;
 namespace PracaInz.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210213190120_IPAddress")]
-    partial class IPAddress
+    [Migration("20210608205259_InitialeParis")]
+    partial class InitialeParis
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,9 +165,6 @@ namespace PracaInz.DAL.Migrations
 
                     b.Property<int>("DeviceType")
                         .HasColumnType("int");
-
-                    b.Property<string>("IPAddress")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Manufacturer")
                         .IsRequired()
@@ -343,6 +340,12 @@ namespace PracaInz.DAL.Migrations
             modelBuilder.Entity("PracaInz.BLL.NetworkDevice", b =>
                 {
                     b.HasBaseType("PracaInz.BLL.Device");
+
+                    b.Property<string>("IPAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAlive")
+                        .HasColumnType("bit");
 
                     b.HasDiscriminator().HasValue(1);
                 });

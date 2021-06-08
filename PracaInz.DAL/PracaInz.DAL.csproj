@@ -16,4 +16,8 @@
     <ProjectReference Include="..\PracaInz.BLL\PracaInz.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

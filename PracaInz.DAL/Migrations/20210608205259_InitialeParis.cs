@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PracaInz.DAL.Migrations
 {
-    public partial class Initial_30122020 : Migration
+    public partial class InitialeParis : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,9 @@ namespace PracaInz.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserType = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -170,13 +173,40 @@ namespace PracaInz.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Device",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeviceDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    DeviceType = table.Column<int>(type: "int", nullable: false),
+                    IPAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isAlive = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Device", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Device_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClosedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false)
@@ -193,33 +223,27 @@ namespace PracaInz.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Devices",
+                name: "CategoryDevice",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeviceDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryDeviceId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IPAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CategoriesId = table.Column<int>(type: "int", nullable: false),
+                    DevicesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Devices", x => x.Id);
+                    table.PrimaryKey("PK_CategoryDevice", x => new { x.CategoriesId, x.DevicesId });
                     table.ForeignKey(
-                        name: "FK_Devices_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_CategoryDevice_Categories_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Devices_Categories_CategoryDeviceId",
-                        column: x => x.CategoryDeviceId,
-                        principalTable: "Categories",
+                        name: "FK_CategoryDevice_Device_DevicesId",
+                        column: x => x.DevicesId,
+                        principalTable: "Device",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -262,13 +286,13 @@ namespace PracaInz.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Devices_CategoryDeviceId",
-                table: "Devices",
-                column: "CategoryDeviceId");
+                name: "IX_CategoryDevice_DevicesId",
+                table: "CategoryDevice",
+                column: "DevicesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Devices_UserId",
-                table: "Devices",
+                name: "IX_Device_UserId",
+                table: "Device",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -295,7 +319,7 @@ namespace PracaInz.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Devices");
+                name: "CategoryDevice");
 
             migrationBuilder.DropTable(
                 name: "Tickets");
@@ -305,6 +329,9 @@ namespace PracaInz.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Device");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
